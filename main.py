@@ -3,6 +3,9 @@ import json
 import os
 import time
 from datetime import datetime, timedelta
+import requests
+from io import BytesIO
+from PIL import Image
 
 # ============== ДАННЫЕ ИГРЫ ==============
 
@@ -129,14 +132,17 @@ PRODUCTS = [
     {"name": "Жевачка", "hunger": 1, "energy": 0, "price": 20},
 ]
 
-FIRST_NAMES = ["Александр", "Дмитрий", "Максим", "Иван", "Андрей", "Артем", "Михаил", "Сергей", "Николай", "Владимир",
-               "Алексей", "Егор", "Павел", "Роман", "Кирилл", "Виктор", "Олег", "Юрий", "Анатолий", "Григорий",
-               "Анна", "Екатерина", "Мария", "Ольга", "Татьяна", "Наталья", "Ирина", "Елена", "Светлана", "Юлия",
-               "Алиса", "Дарья", "Полина", "Виктория", "Ксения", "Евгения", "Валерия", "Анастасия", "Варвара", "Ульяна"]
+FIRST_NAMES_MALE = ["Александр", "Дмитрий", "Максим", "Иван", "Андрей", "Артем", "Михаил", "Сергей", "Николай", "Владимир",
+                    "Алексей", "Егор", "Павел", "Роман", "Кирилл", "Виктор", "Олег", "Юрий", "Анатолий", "Григорий"]
 
-LAST_NAMES = ["Иванов", "Петров", "Сидоров", "Кузнецов", "Смирнов", "Попов", "Волков", "Козлов", "Морозов", "Новиков",
-              "Соколов", "Лебедев", "Ковалев", "Медведев", "Виноградов", "Белов", "Тарасов", "Крылов", "Орлов", "Мамонтов",
-              "Морозова", "Соколова", "Лебедева", "Ковалева", "Медведева", "Виноградова", "Белова", "Тарасова", "Крылова", "Орлова"]
+FIRST_NAMES_FEMALE = ["Анна", "Екатерина", "Мария", "Ольга", "Татьяна", "Наталья", "Ирина", "Елена", "Светлана", "Юлия",
+                      "Алиса", "Дарья", "Полина", "Виктория", "Ксения", "Евгения", "Валерия", "Анастасия", "Варвара", "Ульяна"]
+
+LAST_NAMES_MALE = ["Иванов", "Петров", "Сидоров", "Кузнецов", "Смирнов", "Попов", "Волков", "Козлов", "Морозов", "Новиков",
+                   "Соколов", "Лебедев", "Ковалев", "Медведев", "Виноградов", "Белов", "Тарасов", "Крылов", "Орлов", "Мамонтов"]
+
+LAST_NAMES_FEMALE = ["Иванова", "Петрова", "Сидорова", "Кузнецова", "Смирнова", "Попова", "Волкова", "Козлова", "Морозова", "Новикова",
+                     "Соколова", "Лебедева", "Ковалева", "Медведева", "Виноградова", "Белова", "Тарасова", "Крылова", "Орлова", "Мамонтова"]
 
 EVENTS = [
     # Удача
@@ -174,6 +180,51 @@ EVENTS = [
     {"text": "Кто-то оставил записку с именем Киры", "money": 0, "hunger": 0, "energy": 0, "health": 0, "suspicion": 15},
 ]
 
+SEASONAL_EVENTS = {
+    "winter": [
+        {"text": "Пошёл сильный снегопад! Вы замёрзли", "money": -100, "hunger": 0, "energy": -10, "health": -5},
+        {"text": "Вы слепили снеговика и подняли настроение", "money": 0, "hunger": 0, "energy": 5, "health": 0},
+    ],
+    "spring": [
+        {"text": "Весеннее тепло! Вы чувствуете прилив сил", "money": 0, "hunger": 0, "energy": 10, "health": 5},
+        {"text": "Пошёл дождь, вы промокли", "money": 0, "hunger": 0, "energy": -5, "health": -5},
+    ],
+    "summer": [
+        {"text": "Сильная жара! Вы купили мороженое за 50 рублей", "money": -50, "hunger": 5, "energy": 5, "health": 0},
+        {"text": "Вы загорали на солнце и обгорели", "money": 0, "hunger": 0, "energy": -5, "health": -10},
+    ],
+    "autumn": [
+        {"text": "Листопад! Вы собрали красивые листья", "money": 0, "hunger": 0, "energy": 5, "health": 0},
+        {"text": "Ветер сорвал с вас шапку, потеряли 200 рублей", "money": -200, "hunger": 0, "energy": 0, "health": 0},
+    ]
+}
+
+KIRA_NEWS = [
+    "В городе орудует загадочный убийца, прозванный Кирой!",
+    "Полиция сбилась с ног в поисках Киры. Уже 10 жертв!",
+    "Кира снова ударил! Очередное загадочное убийство.",
+    "В интернете обсуждают Киру. Кто же он?",
+    "Полиция признала, что не может поймать Киру.",
+    "Появился детектив, который утверждает, что поймает Киру.",
+    "Кира стал легендой. Люди боятся выходить на улицу.",
+    "Новое убийство, совершённое Кирой. Жертв стало больше.",
+    "Кто же скрывается под маской Киры? Расследование продолжается.",
+    "Кира оставляет послания! Кто следующий?"
+]
+
+REGULAR_NEWS = [
+    "В городе произошло ограбление. Преступник скрылся.",
+    "В этом году цены выросли на 5%.",
+    "Завтра ожидается дождливая погода.",
+    "В парке найден мёртвый голубь.",
+    "Учёные объявили о новом прорыве.",
+    "В школе прошла линейка.",
+    "Город готовится к празднику.",
+    "Будет построен новый парк.",
+    "Прошёл концерт в центре города.",
+    "Мэр города поздравил жителей с праздником."
+]
+
 # ============== КЛАСС ИГРЫ ==============
 
 class Game:
@@ -196,6 +247,20 @@ class Game:
         self.location = "home"
         self.running = True
         self.loaded = False
+        self.active_contract = None
+        self.known_people = []
+        self.news_count = 0
+
+    def get_season(self):
+        month = self.date.month
+        if month in [12, 1, 2]:
+            return "winter"
+        elif month in [3, 4, 5]:
+            return "spring"
+        elif month in [6, 7, 8]:
+            return "summer"
+        else:
+            return "autumn"
 
     def save(self):
         data = {
@@ -213,7 +278,9 @@ class Game:
             "debt": self.debt,
             "debt_days": self.debt_days,
             "investigation": self.investigation,
-            "kira_news": self.kira_news
+            "kira_news": self.kira_news,
+            "known_people": self.known_people,
+            "news_count": self.news_count
         }
         with open("save.json", "w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
@@ -239,6 +306,8 @@ class Game:
         self.debt_days = data["debt_days"]
         self.investigation = data["investigation"]
         self.kira_news = data["kira_news"]
+        self.known_people = data.get("known_people", [])
+        self.news_count = data.get("news_count", 0)
         self.loaded = True
         return True
 
@@ -272,7 +341,6 @@ class Game:
             print(f"💤 Вы вырубились от усталости на {minutes} минут!")
             time.sleep(1)
             self.energy = 30
-            # Шанс ограбления
             if random.random() < 0.3:
                 stolen = random.randint(100, 1000)
                 self.money -= stolen
@@ -296,12 +364,15 @@ class Game:
                 self.kira_news = True
                 print("📰 ВНИМАНИЕ! Новости говорят о загадочном убийце по прозвищу Кира!")
 
+        # Сброс активного контракта
+        self.active_contract = None
+
     def show_stats(self):
         status = "❤️" if self.health > 60 else "💔"
         print("=" * 50)
         print(f"        📓 ТЕТРАДЬ СМЕРТИ - СИМУЛЯТОР")
         print(f"        👤 {self.player_name}")
-        print(f"        📅 {self.date.strftime('%d %B %Y')}")
+        print(f"        📅 {self.date.strftime('%d %B %Y')} {self.date.strftime('%H:%M')}")
         print("=" * 50)
         print(f" {status} Здоровье: {self.health}%  |  🍔 Голод: {self.hunger}/100")
         print(f" ⚡ Энергия: {self.energy}/100  |  💰 Деньги: {self.money} ₽")
@@ -310,13 +381,19 @@ class Game:
             print(f" 💸 Долг: {self.debt} ₽ (осталось {5 - self.debt_days} дней)")
         if self.fridge:
             print(f" 🧊 В холодильнике: {len(self.fridge)} продуктов")
+        if self.active_contract:
+            print(f" 📋 Активный контракт: {self.active_contract['name']} {self.active_contract['last']}")
         print("=" * 50)
 
-    def generate_contract(self):
-        name = random.choice(FIRST_NAMES)
-        last = random.choice(LAST_NAMES)
+    def generate_person(self):
+        gender = random.choice(["male", "female"])
+        if gender == "male":
+            name = random.choice(FIRST_NAMES_MALE)
+            last = random.choice(LAST_NAMES_MALE)
+        else:
+            name = random.choice(FIRST_NAMES_FEMALE)
+            last = random.choice(LAST_NAMES_FEMALE)
         age = random.randint(18, 80)
-        price = random.randint(2000, 10000)
         bio = f"{name} {last}, {age} лет. "
         bio += random.choice([
             "Бизнесмен, замешанный в махинациях.",
@@ -328,7 +405,13 @@ class Game:
             "Беглый заключённый.",
             "Шпион."
         ])
-        return {"name": name, "last": last, "age": age, "price": price, "bio": bio}
+        return {"name": name, "last": last, "age": age, "gender": gender, "bio": bio, "photo_url": f"https://randomuser.me/api/portraits/{gender}/{random.randint(0, 99)}.jpg"}
+
+    def generate_contract(self):
+        person = self.generate_person()
+        price = random.randint(2000, 10000)
+        person["price"] = price
+        return person
 
     def show_contract(self, contract):
         print("=" * 50)
@@ -336,49 +419,64 @@ class Game:
         print("=" * 50)
         print(f"Имя: {contract['name']} {contract['last']}")
         print(f"Возраст: {contract['age']} лет")
-        print("Фото: [ASCII генерация]")
+        print(f"Пол: {'Мужской' if contract['gender'] == 'male' else 'Женский'}")
+        print(f"📷 Фото: {contract['photo_url']}")
         print(f"Биография: {contract['bio']}")
         print(f"💰 Цена: {contract['price']} ₽")
         print("=" * 50)
-        print("1️⃣ Принять контракт")
-        print("2️⃣ Отказаться")
-        choice = input("👉 ")
-        return choice == "1"
 
     def generate_news(self):
-        news = []
-        if self.investigation:
-            news.append(f"📰 Расследование убийств продолжается. Полиция ищет Киру.")
-            news.append(f"📰 Следователи заявляют о новом убийстве, совершённом Кирой.")
-            news.append(f"📰 Кира становится легендой. Обсуждают в интернете.")
-            news.append(f"📰 В городе паника. Все боятся загадочных смертей.")
+        self.news_count += 1
+        if self.investigation and random.random() < 0.6:
+            news = random.choice(KIRA_NEWS)
         else:
-            news.append(f"📰 В городе произошло ограбление. Преступник скрылся.")
-            news.append(f"📰 В этом году цены выросли на 5%.")
-            news.append(f"📰 Завтра ожидается дождливая погода.")
-            news.append(f"📰 В парке найден мёртвый голубь.")
-            news.append(f"📰 Учёные объявили о новом прорыве.")
-        return random.choice(news)
+            news = random.choice(REGULAR_NEWS)
+        return f"📰 {news} (День {self.day})"
 
     def casino(self):
         print("🎰 КАЗИНО")
-        print("У вас: " + str(self.money) + " ₽")
+        print(f"У вас: {self.money} ₽")
+        print("Выберите ставку:")
+        print("1. 50% - выигрыш x1.5")
+        print("2. 30% - выигрыш x2")
+        print("3. 20% - выигрыш x3")
+        print("4. Назад")
         try:
-            bet = int(input("Ваша ставка (или 0 для выхода): "))
+            choice = input("👉 ")
+            if choice == "4":
+                return
+            if choice not in ["1", "2", "3"]:
+                print("❌ Неверный выбор!")
+                return
+            bet = int(input("Сумма ставки (или 0 для выхода): "))
             if bet == 0:
                 return
             if bet > self.money:
                 print("❌ Недостаточно денег!")
                 return
+            if bet < 0:
+                print("❌ Сумма должна быть положительной!")
+                return
+
+            if choice == "1":
+                win_chance = 50
+                multiplier = 1.5
+            elif choice == "2":
+                win_chance = 30
+                multiplier = 2
+            else:
+                win_chance = 20
+                multiplier = 3
+
             result = random.randint(1, 100)
-            if result >= 50:
-                win = bet * 2
+            if result <= win_chance:
+                win = int(bet * multiplier)
                 self.money += win
                 print(f"🎉 Вы выиграли {win} ₽! У вас {self.money} ₽")
             else:
                 self.money -= bet
                 print(f"😞 Вы проиграли {bet} ₽. У вас {self.money} ₽")
-        except:
+        except ValueError:
             print("❌ Введите число!")
 
     def take_debt(self):
@@ -392,7 +490,7 @@ class Game:
             self.debt += amount
             self.debt_days = 0
             print(f"✅ Вы взяли {amount} ₽. Вернуть нужно с 20% через 5 дней.")
-        except:
+        except ValueError:
             print("❌ Введите число!")
 
     def eat(self):
@@ -415,7 +513,7 @@ class Game:
                 print(f"🍽️ Вы съели {item['name']}!")
             else:
                 print("❌ Неверный выбор")
-        except:
+        except ValueError:
             print("❌ Введите число!")
 
     def sleep(self):
@@ -431,7 +529,7 @@ class Game:
             self.date += timedelta(hours=hours)
             print(f"😴 Вы поспали {hours} часов (+{energy_gain} энергии)")
             self.next_day()
-        except:
+        except ValueError:
             print("❌ Введите число!")
 
     def work(self):
@@ -457,26 +555,12 @@ class Game:
     def buy_product(self):
         print("🛒 ПРОДУКТОВЫЙ МАГАЗИН")
         print("Категории:")
-        print("1. Хлебобулочные")
-        print("2. Мясные")
-        print("3. Рыбные")
-        print("4. Молочные")
-        print("5. Фрукты")
-        print("6. Овощи")
-        print("7. Готовые блюда")
-        print("8. Сладости")
-        print("9. Напитки")
-        print("10. Энергетики")
-        print("11. Фастфуд")
-        print("12. Суперфуды")
-        print("13. Орехи")
-        print("14. Соусы")
-        print("15. Завтраки")
-        print("16. Консервы")
-        print("17. Специи")
-        print("18. Алкоголь")
-        print("19. Здоровое")
-        print("20. Разное")
+        categories = ["Хлебобулочные", "Мясные", "Рыбные", "Молочные", "Фрукты", "Овощи",
+                      "Готовые блюда", "Сладости", "Напитки", "Энергетики", "Фастфуд",
+                      "Суперфуды", "Орехи", "Соусы", "Завтраки", "Консервы", "Специи",
+                      "Алкоголь", "Здоровое", "Разное"]
+        for i, cat in enumerate(categories, 1):
+            print(f"{i}. {cat}")
         print("0. Назад")
         try:
             cat = int(input("Категория: "))
@@ -503,16 +587,27 @@ class Game:
                     print(f"✅ Вы купили {item['name']}!")
                 else:
                     print("❌ Неверный выбор")
-            except:
+            except ValueError:
                 print("❌ Введите число!")
-        except:
+        except ValueError:
             print("❌ Введите число!")
 
     def walk(self):
-        event = random.choice(EVENTS)
-        print("🚶 Вы гуляете по городу...")
-        time.sleep(1)
-        print(f"📌 {event['text']}")
+        # Сезонное событие
+        season = self.get_season()
+        if random.random() < 0.3:
+            event = random.choice(SEASONAL_EVENTS[season])
+            print(f"🌤️ Сезонное событие: {event['text']}")
+            self.apply_event(event)
+        else:
+            event = random.choice(EVENTS)
+            print("🚶 Вы гуляете по городу...")
+            time.sleep(1)
+            print(f"📌 {event['text']}")
+            self.apply_event(event)
+        self.next_day()
+
+    def apply_event(self, event):
         if 'money' in event:
             self.money += event['money']
         if 'hunger' in event:
@@ -523,6 +618,7 @@ class Game:
             self.health += event['health']
         if 'suspicion' in event:
             self.suspicion += event['suspicion']
+        # Ограничения
         if self.hunger > 100:
             self.hunger = 100
         if self.hunger < 0:
@@ -539,7 +635,6 @@ class Game:
             self.suspicion = 100
         if self.suspicion < 0:
             self.suspicion = 0
-        self.next_day()
 
     def notebook(self):
         print("📓 ТЕТРАДЬ СМЕРТИ")
@@ -548,17 +643,44 @@ class Game:
         print("3️⃣ Назад")
         choice = input("👉 ")
         if choice == "1":
-            name = input("Введите полное имя жертвы: ")
-            if name.strip():
-                self.killed.append(name)
-                self.suspicion += 15
-                print(f"✍️ Имя {name} записано в тетрадь.")
-                print("💀 Смерть наступит через 40 секунд...")
-                self.money += random.randint(1000, 5000)
-                print(f"💰 Вы получили {self.money} ₽ за контракт (автоматически)")
-                self.next_day()
-            else:
-                print("❌ Имя не может быть пустым!")
+            if not self.known_people:
+                print("❌ Вы никого не знаете! Идите гулять и знакомьтесь.")
+                return
+            print("👤 Кого вы знаете:")
+            for i, person in enumerate(self.known_people, 1):
+                print(f"{i}. {person['name']} {person['last']}")
+            try:
+                idx = int(input("Выберите номер (0 - отмена): ")) - 1
+                if idx == -1:
+                    return
+                if 0 <= idx < len(self.known_people):
+                    person = self.known_people[idx]
+                    name = f"{person['name']} {person['last']}"
+                    self.killed.append(name)
+                    self.suspicion += 15
+                    print(f"✍️ Имя {name} записано в тетрадь.")
+                    print("💀 Смерть наступит через 40 секунд...")
+                    # Проверка на активный контракт
+                    if self.active_contract and self.active_contract['name'] == person['name'] and self.active_contract['last'] == person['last']:
+                        if random.random() < 0.1:
+                            print("❌ Вас обманули! Контракт оказался фальшивкой.")
+                            self.suspicion += 15
+                            self.active_contract = None
+                        else:
+                            self.money += self.active_contract['price']
+                            print(f"💰 Вы получили {self.active_contract['price']} ₽ за выполнение контракта!")
+                            self.active_contract = None
+                    else:
+                        print("⚠️ Вы убили случайного человека без контракта.")
+                        if random.random() < 0.2:
+                            print("📰 Кто-то видел вас! Подозрение сильно выросло!")
+                            self.suspicion += 20
+                    self.known_people.remove(person)
+                    self.next_day()
+                else:
+                    print("❌ Неверный выбор")
+            except ValueError:
+                print("❌ Введите число!")
         elif choice == "2":
             if self.killed:
                 print("📋 СПИСОК УБИТЫХ:")
@@ -566,6 +688,100 @@ class Game:
                     print(f"{i}. {name}")
             else:
                 print("📭 Пока никого не убито.")
+        elif choice == "3":
+            return
+
+    def computer_menu(self):
+        print("💻 КОМПЬЮТЕР")
+        print("1️⃣  📰 Новости")
+        print("2️⃣  💼 Контракты")
+        print("3️⃣  💻 Легальная работа")
+        print("4️⃣  🔙 Назад")
+        choice = input("👉 ")
+        if choice == "1":
+            print(self.generate_news())
+            input("Нажмите Enter...")
+        elif choice == "2":
+            self.contract_menu()
+        elif choice == "3":
+            self.work()
+        elif choice == "4":
+            return
+
+    def contract_menu(self):
+        print("💼 КОНТРАКТЫ")
+        print("1️⃣ Взять новый контракт")
+        print("2️⃣ Выполнить активный контракт (через тетрадь)")
+        print("3️⃣ Отказаться от контракта (штраф 5000 ₽)")
+        print("4️⃣ Назад")
+        choice = input("👉 ")
+        if choice == "1":
+            if self.active_contract:
+                print("❌ У вас уже есть активный контракт! Выполните или откажитесь от него.")
+                return
+            contract = self.generate_contract()
+            self.show_contract(contract)
+            print("1️⃣ Принять контракт")
+            print("2️⃣ Отказаться")
+            choice2 = input("👉 ")
+            if choice2 == "1":
+                self.active_contract = contract
+                if contract['name'] not in [p['name'] for p in self.known_people]:
+                    self.known_people.append(contract)
+                print(f"✅ Контракт принят! Убейте {contract['name']} {contract['last']} через тетрадь.")
+            else:
+                print("❌ Отказ от контракта")
+        elif choice == "2":
+            if not self.active_contract:
+                print("❌ Нет активного контракта!")
+                return
+            print(f"📋 Активный контракт: {self.active_contract['name']} {self.active_contract['last']}")
+            print("1️⃣ Убить через тетрадь")
+            print("2️⃣ Назад")
+            choice2 = input("👉 ")
+            if choice2 == "1":
+                name = f"{self.active_contract['name']} {self.active_contract['last']}"
+                if name in self.killed:
+                    print("❌ Этот человек уже мёртв!")
+                    return
+                self.killed.append(name)
+                self.suspicion += 15
+                print(f"✍️ Имя {name} записано в тетрадь.")
+                print("💀 Смерть наступит через 40 секунд...")
+                if random.random() < 0.1:
+                    print("❌ Вас обманули! Контракт оказался фальшивкой.")
+                    self.suspicion += 15
+                    self.active_contract = None
+                else:
+                    self.money += self.active_contract['price']
+                    print(f"💰 Вы получили {self.active_contract['price']} ₽ за выполнение контракта!")
+                    self.active_contract = None
+                self.next_day()
+            else:
+                return
+        elif choice == "3":
+            if not self.active_contract:
+                print("❌ Нет активного контракта!")
+                return
+            if self.money < 5000:
+                print("❌ Недостаточно денег для штрафа! Нужно 5000 ₽")
+                return
+            self.money -= 5000
+            print(f"💸 Вы отказались от контракта. Штраф 5000 ₽. У вас {self.money} ₽")
+            self.active_contract = None
+        elif choice == "4":
+            return
+
+    def walk_menu(self):
+        print("🚶 ГУЛЯТЬ ПО ГОРОДУ")
+        print("1️⃣  🛒 Продуктовый магазин")
+        print("2️⃣  🚶 Просто гулять")
+        print("3️⃣  🔙 Назад")
+        choice = input("👉 ")
+        if choice == "1":
+            self.buy_product()
+        elif choice == "2":
+            self.walk()
         elif choice == "3":
             return
 
@@ -632,44 +848,6 @@ class Game:
         elif choice == "3":
             return
 
-    def computer_menu(self):
-        print("💻 КОМПЬЮТЕР")
-        print("1️⃣  📰 Новости")
-        print("2️⃣  💼 Контракты")
-        print("3️⃣  💻 Легальная работа")
-        print("4️⃣  🔙 Назад")
-        choice = input("👉 ")
-        if choice == "1":
-            print(self.generate_news())
-            input("Нажмите Enter...")
-        elif choice == "2":
-            contract = self.generate_contract()
-            if self.show_contract(contract):
-                self.killed.append(f"{contract['name']} {contract['last']}")
-                self.money += contract['price']
-                self.suspicion += 20
-                print(f"✅ Контракт выполнен! +{contract['price']} ₽")
-                self.next_day()
-            else:
-                print("❌ Отказ от контракта")
-        elif choice == "3":
-            self.work()
-        elif choice == "4":
-            return
-
-    def walk_menu(self):
-        print("🚶 ГУЛЯТЬ ПО ГОРОДУ")
-        print("1️⃣  🛒 Продуктовый магазин")
-        print("2️⃣  🚶 Просто гулять")
-        print("3️⃣  🔙 Назад")
-        choice = input("👉 ")
-        if choice == "1":
-            self.buy_product()
-        elif choice == "2":
-            self.walk()
-        elif choice == "3":
-            return
-
 def main():
     game = Game()
     print("=" * 50)
@@ -691,6 +869,10 @@ def main():
         print(f"👤 Добро пожаловать, {game.player_name}!")
         print("📖 23 апреля 2010 года. Вы нашли тетрадь смерти...")
         input("Нажмите Enter чтобы начать...")
+        # Генерация начальных знакомых
+        for _ in range(3):
+            person = game.generate_person()
+            game.known_people.append(person)
     else:
         print("❌ Неверный выбор!")
         return
