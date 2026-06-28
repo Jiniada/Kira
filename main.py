@@ -189,46 +189,46 @@ HOUSES = [
 ]
 
 EVENTS = [
-    {"text": "Вы нашли 100 рублей на земле!", "money": 100, "hunger": 0, "energy": 0, "health": 0},
-    {"text": "Вы выиграли в лотерею 500 рублей!", "money": 500, "hunger": 0, "energy": 0, "health": 0},
-    {"text": "Вам вернули старый долг 300 рублей!", "money": 300, "hunger": 0, "energy": 0, "health": 0},
-    {"text": "Вы нашли золотую цепочку!", "money": 1000, "hunger": 0, "energy": 0, "health": 0},
-    {"text": "На вас напали грабители! -300 рублей", "money": -300, "hunger": 0, "energy": -10, "health": -20},
-    {"text": "Вас чуть не сбила машина", "money": 0, "hunger": 0, "energy": -10, "health": -10},
-    {"text": "Вы попали в драку и получили травму", "money": 0, "hunger": 0, "energy": -20, "health": -30},
-    {"text": "Вас остановила полиция для проверки", "money": -500, "hunger": 0, "energy": -10, "health": 0},
-    {"text": "Вы простудились. Лекарства 100 рублей", "money": -100, "hunger": 0, "energy": -10, "health": -10},
-    {"text": "Вы отравились едой", "money": 0, "hunger": -20, "energy": -20, "health": -20},
-    {"text": "У вас аллергия. Таблетки 80 рублей", "money": -80, "hunger": 0, "energy": -5, "health": -10},
-    {"text": "Вы заболели гриппом", "money": -200, "hunger": 0, "energy": -30, "health": -30},
-    {"text": "Порвалась одежда. Новая 500 рублей", "money": -500, "hunger": 0, "energy": 0, "health": 0},
-    {"text": "Сломался телефон. Ремонт 1000 рублей", "money": -1000, "hunger": 0, "energy": 0, "health": 0},
-    {"text": "Потеряли ключи. Новые 300 рублей", "money": -300, "hunger": 0, "energy": 0, "health": 0},
-    {"text": "Подарок на 400 рублей", "money": 400, "hunger": 0, "energy": 0, "health": 0},
-    {"text": "Сильный дождь, промокли", "money": 0, "hunger": 0, "energy": -10, "health": -5},
-    {"text": "Сильная жара. Вода 50 рублей", "money": -50, "hunger": 0, "energy": -5, "health": 0},
-    {"text": "Тёплая погода подняла настроение", "money": 0, "hunger": 0, "energy": 15, "health": 5},
-    {"text": "Пожар в соседнем доме", "money": -1000, "hunger": 0, "energy": -30, "health": -10},
-    {"text": "Авария. Помогли пострадавшим -300", "money": -300, "hunger": 0, "energy": -10, "health": 0},
-    {"text": "Спасли кошку. Вознаграждение 200", "money": 200, "hunger": 0, "energy": -10, "health": 0},
+    {"text": "Вы нашли 100 рублей на земле!", "money": 100, "hunger": 0, "energy": 0},
+    {"text": "Вы выиграли в лотерею 500 рублей!", "money": 500, "hunger": 0, "energy": 0},
+    {"text": "Вам вернули старый долг 300 рублей!", "money": 300, "hunger": 0, "energy": 0},
+    {"text": "Вы нашли золотую цепочку!", "money": 1000, "hunger": 0, "energy": 0},
+    {"text": "На вас напали грабители! -300 рублей", "money": -300, "hunger": 0, "energy": -10},
+    {"text": "Вас чуть не сбила машина", "money": 0, "hunger": 0, "energy": -10},
+    {"text": "Вы попали в драку", "money": 0, "hunger": 0, "energy": -20},
+    {"text": "Вас остановила полиция для проверки", "money": -500, "hunger": 0, "energy": -10},
+    {"text": "Вы простудились. Лекарства 100 рублей", "money": -100, "hunger": 0, "energy": -10},
+    {"text": "Вы отравились едой", "money": 0, "hunger": -20, "energy": -20},
+    {"text": "У вас аллергия. Таблетки 80 рублей", "money": -80, "hunger": 0, "energy": -5},
+    {"text": "Вы заболели гриппом", "money": -200, "hunger": 0, "energy": -30},
+    {"text": "Порвалась одежда. Новая 500 рублей", "money": -500, "hunger": 0, "energy": 0},
+    {"text": "Сломался телефон. Ремонт 1000 рублей", "money": -1000, "hunger": 0, "energy": 0},
+    {"text": "Потеряли ключи. Новые 300 рублей", "money": -300, "hunger": 0, "energy": 0},
+    {"text": "Подарок на 400 рублей", "money": 400, "hunger": 0, "energy": 0},
+    {"text": "Сильный дождь, промокли", "money": 0, "hunger": 0, "energy": -10},
+    {"text": "Сильная жара. Вода 50 рублей", "money": -50, "hunger": 0, "energy": -5},
+    {"text": "Тёплая погода подняла настроение", "money": 0, "hunger": 0, "energy": 15},
+    {"text": "Пожар в соседнем доме", "money": -1000, "hunger": 0, "energy": -30},
+    {"text": "Авария. Помогли пострадавшим -300", "money": -300, "hunger": 0, "energy": -10},
+    {"text": "Спасли кошку. Вознаграждение 200", "money": 200, "hunger": 0, "energy": -10},
 ]
 
 SEASONAL_EVENTS = {
     "winter": [
-        {"text": "Сильный снегопад! Вы замёрзли", "money": -100, "hunger": 0, "energy": -10, "health": -5},
-        {"text": "Слепили снеговика! + настроение", "money": 0, "hunger": 0, "energy": 5, "health": 0},
+        {"text": "Сильный снегопад! Вы замёрзли", "money": -100, "hunger": 0, "energy": -10},
+        {"text": "Слепили снеговика! + настроение", "money": 0, "hunger": 0, "energy": 5},
     ],
     "spring": [
-        {"text": "Весеннее тепло! + энергия", "money": 0, "hunger": 0, "energy": 10, "health": 5},
-        {"text": "Пошёл дождь, промокли", "money": 0, "hunger": 0, "energy": -5, "health": -5},
+        {"text": "Весеннее тепло! + энергия", "money": 0, "hunger": 0, "energy": 10},
+        {"text": "Пошёл дождь, промокли", "money": 0, "hunger": 0, "energy": -5},
     ],
     "summer": [
-        {"text": "Сильная жара! Мороженое 50р", "money": -50, "hunger": 5, "energy": 5, "health": 0},
-        {"text": "Загорали и обгорели", "money": 0, "hunger": 0, "energy": -5, "health": -10},
+        {"text": "Сильная жара! Мороженое 50р", "money": -50, "hunger": 5, "energy": 5},
+        {"text": "Загорали и обгорели", "money": 0, "hunger": 0, "energy": -5},
     ],
     "autumn": [
-        {"text": "Листопад! + настроение", "money": 0, "hunger": 0, "energy": 5, "health": 0},
-        {"text": "Ветер сорвал шапку -200р", "money": -200, "hunger": 0, "energy": 0, "health": 0},
+        {"text": "Листопад! + настроение", "money": 0, "hunger": 0, "energy": 5},
+        {"text": "Ветер сорвал шапку -200р", "money": -200, "hunger": 0, "energy": 0},
     ]
 }
 
@@ -240,7 +240,6 @@ class Game:
         self.money = 5000
         self.hunger = 80
         self.energy = 70
-        self.health = 100
         self.suspicion = 0
         self.fame = 0
         self.title = "Студент"
@@ -253,7 +252,6 @@ class Game:
         self.debt_days = 0
         self.investigation = False
         self.kira_news = False
-        self.location = "home"
         self.running = True
         self.loaded = False
         self.active_contract = None
@@ -272,9 +270,9 @@ class Game:
         self.story_done = False
         self.story_triggered = False
         self.contract_available = True
-        self.news_hour = 0
-        self.ending = None  # None, "good", "neutral", "bad"
+        self.ending = None
         self.game_over = False
+        self.work_progress = 0  # Прогресс легальной работы
 
     def get_season(self):
         month = self.date.month
@@ -293,7 +291,6 @@ class Game:
             "money": self.money,
             "hunger": self.hunger,
             "energy": self.energy,
-            "health": self.health,
             "suspicion": self.suspicion,
             "fame": self.fame,
             "title": self.title,
@@ -323,7 +320,8 @@ class Game:
             "active_contract": self.active_contract,
             "contract_available": self.contract_available,
             "ending": self.ending,
-            "game_over": self.game_over
+            "game_over": self.game_over,
+            "work_progress": self.work_progress
         }
         with open("save.json", "w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
@@ -337,7 +335,6 @@ class Game:
         self.money = data["money"]
         self.hunger = data["hunger"]
         self.energy = data["energy"]
-        self.health = data["health"]
         self.suspicion = data["suspicion"]
         self.fame = data.get("fame", 0)
         self.title = data["title"]
@@ -368,6 +365,7 @@ class Game:
         self.contract_available = data.get("contract_available", True)
         self.ending = data.get("ending")
         self.game_over = data.get("game_over", False)
+        self.work_progress = data.get("work_progress", 0)
         self.loaded = True
         return True
 
@@ -381,9 +379,6 @@ class Game:
             self.energy = 0
         if self.time.hour == 0 and self.time.minute == 0 and self.time.second == 0:
             self.new_day()
-        if self.time.minute == 0 and self.time.second == 0:
-            self.news_hour += 1
-            self.generate_hourly_news()
 
     def new_day(self):
         self.day += 1
@@ -395,7 +390,6 @@ class Game:
         if self.energy < 0:
             self.energy = 0
         self.contract_available = True
-        self.news_hour = 0
         self.check_story()
         self.auto_save()
 
@@ -404,7 +398,6 @@ class Game:
             self.hunger = 50
             self.energy = 30
             self.money -= 3000
-            self.health -= 20
             self.time += timedelta(days=7)
             self.day += 7
             print(f"🏥 Вы провели неделю в больнице. -3000 ₽")
@@ -438,7 +431,6 @@ class Game:
             self.title = "Кира"
             if not self.kira_news:
                 self.kira_news = True
-                print("📰 ВНИМАНИЕ! Новости говорят о загадочном убийце по прозвищу Кира!")
 
         self.active_contract = None
 
@@ -452,7 +444,7 @@ class Game:
             {"day": 10, "text": "👤 На улице вы слышите разговор прохожих о Кире."},
             {"day": 15, "text": "📰 Новости: 'Детектив L вступает в игру.'"},
             {"day": 22, "text": "📺 L по телевизору: 'Кира, я знаю, что ты смотришь меня.'"},
-            {"day": 30, "text": "💭 Прошёл месяц. L приближается. Но ты готов."},
+            {"day": 30, "text": "💭 Прошёл месяц. L приближается."},
             {"day": 45, "text": "📰 Новости: 'L заявляет, что Кира — студент.'"},
             {"day": 60, "text": "👤 Информатор: 'Я знаю, кто ты, Кира. Я хочу помочь.'"},
             {"day": 75, "text": "📰 Новости: 'L даёт пресс-конференцию.'"},
@@ -479,7 +471,7 @@ class Game:
             {"day": 620, "text": "👤 Миками: 'Я готов. Я запишу имя Ниа в тетрадь.'"},
             {"day": 650, "text": "👤 Миками: 'Он подменил тетрадь! Настоящая у него!'"},
             {"day": 680, "text": "👤 Ниа вызывает тебя на встречу."},
-            {"day": 700, "text": "👤 Ниа: 'Здравствуй, Кира. Или мне называть тебя [Имя игрока]?'"},
+            {"day": 700, "text": "👤 Ниа: 'Здравствуй, Кира.'"},
             {"day": 720, "text": "👤 Миками: 'Я убью Ниа. Это последний шанс.'"},
             {"day": 780, "text": "👤 Миками: 'Всё готово. Завтра я встречусь с Ниа.'"},
             {"day": 800, "text": "👤 Встреча Миками и Ниа. Решающий момент."},
@@ -513,21 +505,18 @@ class Game:
         if self.l_killed or self.fame >= 100:
             self.ending = "good"
             print("🌟 ХОРОШАЯ КОНЦОВКА: Вы победили! Мир ваш!")
-            print("Преступность пала. Вы — бог нового мира.")
             print("=" * 50)
             print("💭 'Кажись, я победил, Ниа... 38... 39... 40 секунд! Я победил!'")
             print("=" * 50)
         elif self.suspicion >= 100 and self.fame < 100:
             self.ending = "neutral"
             print("😐 НЕЙТРАЛЬНАЯ КОНЦОВКА: Вы живы, но мир не ваш.")
-            print("Вы скрываетесь. Вас ищут. Но вы живы.")
             print("=" * 50)
             print("💭 'Я проиграл... Но я жив. Это ещё не конец.'")
             print("=" * 50)
         else:
             self.ending = "bad"
             print("⛓️ ПЛОХАЯ КОНЦОВКА: Вас поймали. Конец.")
-            print("Тюрьма. Мечта о новом мире умерла.")
             print("=" * 50)
             print("⛓️ 'Это конец... Я не смог стать богом...'")
             print("=" * 50)
@@ -536,71 +525,7 @@ class Game:
         self.game_over = True
         self.save()
 
-    def generate_hourly_news(self):
-        news_list = [
-            "В городе спокойно. Ничего не происходит.",
-            "Погода сегодня отличная!",
-            "На рынке снизились цены на хлеб.",
-            "В парке гуляют люди.",
-            "Местный театр готовит новую постановку.",
-            "В школе прошла линейка.",
-            "Городской праздник состоится на выходных.",
-            "В библиотеке открылась новая выставка.",
-            "На стройке начался новый этап.",
-            "В больнице поступило новое оборудование.",
-            "Полиция проводит профилактические рейды.",
-            "В реке поймали большую рыбу.",
-            "На улице стало прохладно.",
-            "В городе появилась новая кофейня.",
-            "Местный художник выставил свои работы.",
-            "В парке посадили новые деревья.",
-            "На стадионе прошёл футбольный матч.",
-            "В школе объявили каникулы.",
-            "В городе открылась новая школа.",
-            "На дорогах начались ремонтные работы.",
-            "В ресторане новое меню.",
-            "В театре будет балет.",
-            "В музее выставка картин.",
-            "На площади начался концерт.",
-            "В парке проходит ярмарка.",
-            "Полиция предупреждает о мошенниках.",
-            "В городе отмечают праздник.",
-            "В школе прошёл выпускной.",
-            "Начался сезон дождей.",
-            "В городе провели уборку.",
-        ]
-        if self.investigation and random.random() < 0.3:
-            news_list.extend([
-                "📰 Расследование убийств продолжается. Кира на свободе.",
-                "📰 Полиция не может найти Киру. Он слишком умён.",
-                "📰 L заявляет, что скоро поймает Киру.",
-                "📰 В новостях обсуждают загадочного убийцу.",
-                "📰 Кира стал легендой. Люди боятся выходить на улицу.",
-                "📰 L нанёс удар по преступности.",
-                "📰 Полиция признала, что не может поймать Киру.",
-                "📰 Кира оставляет послания.",
-                "📰 Новое убийство, совершённое Кирой.",
-                "📰 Кира стал символом справедливости для многих.",
-            ])
-        if self.ending == "good":
-            news_list.extend([
-                "🌟 Мир признаёт Киру богом! Преступность падает!",
-                "🌟 Кира создал новый мир без преступников!",
-                "🌟 Войны прекратились. Мир живёт в порядке.",
-            ])
-        elif self.ending == "neutral":
-            news_list.extend([
-                "😐 Кира скрывается. Полиция ищет его.",
-                "😐 Мир не знает, кто такой Кира. Но он всё ещё жив.",
-                "😐 Кира стал легендой. Но его время прошло.",
-            ])
-        print(f"📰 {random.choice(news_list)}")
-        if self.fame > 0 and random.random() < 0.2:
-            print(f"🗣️ Люди вокруг говорят о Кире! Ваша слава растёт.")
-            self.fame = min(self.fame + 1, 100)
-
     def show_stats(self):
-        status = "❤️" if self.health > 60 else "💔"
         time_str = self.time.strftime("%H:%M:%S")
         months = ["января", "февраля", "марта", "апреля", "мая", "июня",
                   "июля", "августа", "сентября", "октября", "ноября", "декабря"]
@@ -613,8 +538,8 @@ class Game:
             endings = {"good": "🌟 ПОБЕДА", "neutral": "😐 В БЕГАХ", "bad": "⛓️ ПОРАЖЕНИЕ"}
             print(f"        🏆 {endings.get(self.ending, '')}")
         print("=" * 50)
-        print(f" {status} Здоровье: {self.health}%  |  🍔 Голод: {self.hunger}/100")
-        print(f" ⚡ Энергия: {self.energy}/100  |  💰 Деньги: {self.money} ₽")
+        print(f" 🍔 Голод: {self.hunger}/100  |  ⚡ Энергия: {self.energy}/100")
+        print(f" 💰 Деньги: {self.money} ₽")
         if self.fame > 0:
             print(f" ⭐ Слава: {self.fame}%  |  🏆 Звание: {self.title}")
         else:
@@ -638,6 +563,8 @@ class Game:
         pc_level = sum(self.pc_parts.values())
         if pc_level > 0:
             print(f" 💻 Уровень ПК: {pc_level}")
+        if self.work_progress > 0:
+            print(f" ⌨️ Прогресс работы: {self.work_progress}/1000")
         print("=" * 50)
 
     def generate_person(self):
@@ -830,29 +757,35 @@ class Game:
         char_bonus = (self.pc_parts.get("mouse", 0) + self.pc_parts.get("keyboard", 0)) * 0.1
         total_char_value = 1.0 + char_bonus
 
-        print(f"💻 Легальная работа: печатайте 1000 символов")
+        print(f"💻 ЛЕГАЛЬНАЯ РАБОТА")
+        print(f"📊 Прогресс: {self.work_progress}/1000 символов")
         print(f"💰 База: 500 ₽ за 1000 символов")
         print(f"💻 Бонус от ПК: +{bonus_money} ₽")
         print(f"🖱️ Бонус от мыши/клавиатуры: символ x{total_char_value:.1f}")
         print(f"💰 Итого за 1000 символов: {int(500 + bonus_money)} ₽")
-        print("Введите 'start' чтобы начать печатать. 'stop' - отмена")
-        cmd = input("👉 ")
-        if cmd.lower() == "start":
-            print("🖱️ Начинайте печатать случайные символы...")
-            typed = 0
-            target = 1000
-            while typed < target:
-                char = input("Введите символ: ")
-                if char == "":
-                    continue
-                typed += total_char_value
-                self.advance_time(1, 0.25)
-                print(f"Прогресс: {min(int(typed), target)}/{target} ({min(int(typed*100//target), 100)}%)")
-                if typed >= target:
-                    reward = int(500 + bonus_money)
-                    self.money += reward
-                    print(f"✅ Заказ выполнен! +{reward} ₽. У вас {self.money} ₽")
-                    break
+        print("Введите 'stop' чтобы выйти и сохранить прогресс")
+        print("Введите любой символ чтобы продолжить печатать...")
+
+        while True:
+            cmd = input("👉 ")
+            if cmd.lower() == "stop":
+                print(f"💾 Прогресс сохранён: {self.work_progress}/1000")
+                self.auto_save()
+                return
+
+            # Каждый введённый символ засчитывается как 1 (с бонусом)
+            typed = total_char_value
+            self.work_progress += typed
+            self.advance_time(1, 0.25)
+            print(f"📊 Прогресс: {min(int(self.work_progress), 1000)}/1000 ({min(int(self.work_progress*100//1000), 100)}%)")
+
+            if self.work_progress >= 1000:
+                reward = int(500 + bonus_money)
+                self.money += reward
+                self.work_progress = 0
+                print(f"✅ Заказ выполнен! +{reward} ₽. У вас {self.money} ₽")
+                self.auto_save()
+                return
 
     def buy_product(self):
         print("🛒 ПРОДУКТОВЫЙ МАГАЗИН")
@@ -930,8 +863,6 @@ class Game:
             self.hunger += event['hunger']
         if 'energy' in event:
             self.energy += event['energy']
-        if 'health' in event:
-            self.health += event['health']
         if self.hunger > 100:
             self.hunger = 100
         if self.hunger < 0:
@@ -940,10 +871,6 @@ class Game:
             self.energy = 100
         if self.energy < 0:
             self.energy = 0
-        if self.health > 100:
-            self.health = 100
-        if self.health < 0:
-            self.health = 0
 
     def walk(self):
         season = self.get_season()
@@ -1232,15 +1159,76 @@ class Game:
         print("4️⃣  🔙 Назад")
         choice = input("👉 ")
         if choice == "1":
-            self.generate_hourly_news()
-            self.advance_time(5, 1)
-            input("Нажмите Enter...")
+            self.show_news()
         elif choice == "2":
             self.contract_menu()
         elif choice == "3":
             self.work()
         elif choice == "4":
             return
+
+    def show_news(self):
+        print("📰 НОВОСТИ")
+        news_list = [
+            "В городе спокойно. Ничего не происходит.",
+            "Погода сегодня отличная!",
+            "На рынке снизились цены на хлеб.",
+            "В парке гуляют люди.",
+            "Местный театр готовит новую постановку.",
+            "В школе прошла линейка.",
+            "Городской праздник состоится на выходных.",
+            "В библиотеке открылась новая выставка.",
+            "На стройке начался новый этап.",
+            "В больнице поступило новое оборудование.",
+            "Полиция проводит профилактические рейды.",
+            "В реке поймали большую рыбу.",
+            "На улице стало прохладно.",
+            "В городе появилась новая кофейня.",
+            "Местный художник выставил свои работы.",
+            "В парке посадили новые деревья.",
+            "На стадионе прошёл футбольный матч.",
+            "В школе объявили каникулы.",
+            "В городе открылась новая школа.",
+            "На дорогах начались ремонтные работы.",
+            "В ресторане новое меню.",
+            "В театре будет балет.",
+            "В музее выставка картин.",
+            "На площади начался концерт.",
+            "В парке проходит ярмарка.",
+            "Полиция предупреждает о мошенниках.",
+            "В городе отмечают праздник.",
+            "В школе прошёл выпускной.",
+            "Начался сезон дождей.",
+            "В городе провели уборку.",
+        ]
+        if self.investigation and random.random() < 0.5:
+            news_list.extend([
+                "📰 Расследование убийств продолжается. Кира на свободе.",
+                "📰 Полиция не может найти Киру. Он слишком умён.",
+                "📰 L заявляет, что скоро поймает Киру.",
+                "📰 В новостях обсуждают загадочного убийцу.",
+                "📰 Кира стал легендой. Люди боятся выходить на улицу.",
+                "📰 L нанёс удар по преступности.",
+                "📰 Полиция признала, что не может поймать Киру.",
+                "📰 Кира оставляет послания.",
+                "📰 Новое убийство, совершённое Кирой.",
+                "📰 Кира стал символом справедливости для многих.",
+            ])
+        if self.ending == "good":
+            news_list.extend([
+                "🌟 Мир признаёт Киру богом! Преступность падает!",
+                "🌟 Кира создал новый мир без преступников!",
+                "🌟 Войны прекратились. Мир живёт в порядке.",
+            ])
+        elif self.ending == "neutral":
+            news_list.extend([
+                "😐 Кира скрывается. Полиция ищет его.",
+                "😐 Мир не знает, кто такой Кира. Но он всё ещё жив.",
+                "😐 Кира стал легендой. Но его время прошло.",
+            ])
+        print(random.choice(news_list))
+        input("Нажмите Enter...")
+        self.advance_time(5, 1)
 
     def main_menu(self):
         while self.running:
