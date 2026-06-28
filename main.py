@@ -1373,6 +1373,8 @@ def main():
     if choice == "2":
         if game.load():
             print("✅ Игра загружена!")
+            game.main_menu()
+            return
         else:
             print("❌ Нет сохранения! Начинаем новую игру.")
             choice = "1"
@@ -1394,11 +1396,26 @@ def main():
         for _ in range(3):
             person = game.generate_person()
             game.known_people.append(person)
+        game.main_menu()
     else:
-        print("❌ Неверный выбор!")
-        return
-
-    game.main_menu()
+        print("❌ Неверный выбор! Начинаем новую игру.")
+        game.player_name = input("Введите ваше имя: ")
+        print(f"👤 Добро пожаловать, {game.player_name}!")
+        print("📖 23 апреля 2010 года. Вы нашли тетрадь смерти...")
+        game.story_triggered = True
+        print("=" * 50)
+        print("📖 СЮЖЕТНОЕ СОБЫТИЕ:")
+        print("=" * 50)
+        print("📓 Вы нашли тетрадь смерти! Рюк появился перед вами.")
+        print("🖊️ 'Это тетрадь смерти. Тот, чьё имя будет вписано, умрёт.'")
+        print("💭 Вы понимаете, что это шанс создать новый мир...")
+        print("=" * 50)
+        game.story_index = 1
+        input("Нажмите Enter чтобы начать...")
+        for _ in range(3):
+            person = game.generate_person()
+            game.known_people.append(person)
+        game.main_menu()
 
 if __name__ == "__main__":
     main()
