@@ -4,108 +4,108 @@ import os
 import time
 from datetime import datetime, timedelta
 
-# ============== ДАННЫЕ ИГРЫ ==============
+# ============== ДАННЫЕ ==============
 
 PRODUCTS = [
-    {"name": "Хлеб", "hunger": 10, "energy": -5, "price": 50, "time": 1},
-    {"name": "Багет", "hunger": 12, "energy": -5, "price": 70, "time": 1},
-    {"name": "Булка", "hunger": 8, "energy": -3, "price": 40, "time": 1},
-    {"name": "Круассан", "hunger": 10, "energy": 0, "price": 80, "time": 1},
-    {"name": "Пирожок", "hunger": 12, "energy": -5, "price": 60, "time": 1},
-    {"name": "Курица", "hunger": 20, "energy": 5, "price": 200, "time": 2},
-    {"name": "Говядина", "hunger": 22, "energy": 5, "price": 300, "time": 2},
-    {"name": "Свинина", "hunger": 20, "energy": 3, "price": 250, "time": 2},
-    {"name": "Колбаса", "hunger": 15, "energy": 0, "price": 180, "time": 1},
-    {"name": "Бекон", "hunger": 18, "energy": -5, "price": 220, "time": 1},
-    {"name": "Лосось", "hunger": 15, "energy": 10, "price": 350, "time": 2},
-    {"name": "Тунец", "hunger": 15, "energy": 8, "price": 300, "time": 2},
-    {"name": "Скумбрия", "hunger": 14, "energy": 5, "price": 200, "time": 1},
-    {"name": "Форель", "hunger": 16, "energy": 8, "price": 320, "time": 2},
-    {"name": "Сардины", "hunger": 12, "energy": 5, "price": 150, "time": 1},
-    {"name": "Молоко", "hunger": 10, "energy": 5, "price": 80, "time": 1},
-    {"name": "Йогурт", "hunger": 10, "energy": 5, "price": 100, "time": 1},
-    {"name": "Сыр", "hunger": 12, "energy": 5, "price": 150, "time": 1},
-    {"name": "Масло", "hunger": 8, "energy": 5, "price": 120, "time": 1},
-    {"name": "Кефир", "hunger": 10, "energy": 3, "price": 70, "time": 1},
-    {"name": "Яблоко", "hunger": 8, "energy": 10, "price": 50, "time": 1},
-    {"name": "Груша", "hunger": 8, "energy": 10, "price": 60, "time": 1},
-    {"name": "Апельсин", "hunger": 8, "energy": 12, "price": 70, "time": 1},
-    {"name": "Банан", "hunger": 10, "energy": 15, "price": 80, "time": 1},
-    {"name": "Киви", "hunger": 6, "energy": 10, "price": 60, "time": 1},
-    {"name": "Картошка", "hunger": 10, "energy": 5, "price": 40, "time": 1},
-    {"name": "Помидор", "hunger": 8, "energy": 5, "price": 50, "time": 1},
-    {"name": "Огурец", "hunger": 6, "energy": 3, "price": 30, "time": 1},
-    {"name": "Морковь", "hunger": 8, "energy": 5, "price": 35, "time": 1},
-    {"name": "Лук", "hunger": 6, "energy": 0, "price": 25, "time": 1},
-    {"name": "Пицца", "hunger": 25, "energy": -10, "price": 400, "time": 5},
-    {"name": "Бургер", "hunger": 22, "energy": -8, "price": 250, "time": 3},
-    {"name": "Лапша", "hunger": 20, "energy": -5, "price": 200, "time": 3},
-    {"name": "Суп", "hunger": 20, "energy": 5, "price": 180, "time": 3},
-    {"name": "Пельмени", "hunger": 25, "energy": -5, "price": 280, "time": 4},
-    {"name": "Шоколад", "hunger": 5, "energy": 15, "price": 120, "time": 1},
-    {"name": "Печенье", "hunger": 5, "energy": 10, "price": 80, "time": 1},
-    {"name": "Мармелад", "hunger": 3, "energy": 10, "price": 100, "time": 1},
-    {"name": "Торт", "hunger": 10, "energy": 5, "price": 300, "time": 3},
-    {"name": "Пряник", "hunger": 5, "energy": 8, "price": 60, "time": 1},
-    {"name": "Кофе", "hunger": 0, "energy": 15, "price": 100, "time": 1},
-    {"name": "Чай", "hunger": 0, "energy": 10, "price": 50, "time": 1},
-    {"name": "Сок", "hunger": 5, "energy": 8, "price": 80, "time": 1},
-    {"name": "Лимонад", "hunger": 3, "energy": 5, "price": 60, "time": 1},
-    {"name": "Кола", "hunger": 3, "energy": 8, "price": 70, "time": 1},
-    {"name": "Red Bull", "hunger": -5, "energy": 30, "price": 180, "time": 1},
-    {"name": "Монстр", "hunger": -5, "energy": 28, "price": 200, "time": 1},
-    {"name": "Flash", "hunger": -3, "energy": 25, "price": 150, "time": 1},
-    {"name": "Adrenalin", "hunger": -5, "energy": 30, "price": 220, "time": 1},
-    {"name": "Drive", "hunger": -3, "energy": 25, "price": 160, "time": 1},
-    {"name": "Картошка фри", "hunger": 20, "energy": -15, "price": 150, "time": 2},
-    {"name": "Наггетсы", "hunger": 18, "energy": -10, "price": 200, "time": 2},
-    {"name": "Хот-дог", "hunger": 20, "energy": -10, "price": 120, "time": 2},
-    {"name": "Сэндвич", "hunger": 18, "energy": -5, "price": 130, "time": 2},
-    {"name": "Шаурма", "hunger": 25, "energy": -15, "price": 280, "time": 3},
-    {"name": "Киноа", "hunger": 15, "energy": 20, "price": 350, "time": 2},
-    {"name": "Чиа", "hunger": 10, "energy": 15, "price": 300, "time": 1},
-    {"name": "Спирулина", "hunger": 5, "energy": 10, "price": 400, "time": 1},
-    {"name": "Овес", "hunger": 15, "energy": 10, "price": 150, "time": 1},
-    {"name": "Мюсли", "hunger": 15, "energy": 15, "price": 200, "time": 1},
-    {"name": "Грецкий орех", "hunger": 10, "energy": 15, "price": 180, "time": 1},
-    {"name": "Миндаль", "hunger": 10, "energy": 15, "price": 200, "time": 1},
-    {"name": "Арахис", "hunger": 10, "energy": 10, "price": 120, "time": 1},
-    {"name": "Кешью", "hunger": 10, "energy": 15, "price": 250, "time": 1},
-    {"name": "Фисташки", "hunger": 10, "energy": 12, "price": 220, "time": 1},
+    {"name": "Хлеб", "hunger": 10, "energy": -5, "price": 50, "time": 5},
+    {"name": "Багет", "hunger": 12, "energy": -5, "price": 70, "time": 5},
+    {"name": "Булка", "hunger": 8, "energy": -3, "price": 40, "time": 5},
+    {"name": "Круассан", "hunger": 10, "energy": 0, "price": 80, "time": 5},
+    {"name": "Пирожок", "hunger": 12, "energy": -5, "price": 60, "time": 5},
+    {"name": "Курица", "hunger": 20, "energy": 5, "price": 200, "time": 10},
+    {"name": "Говядина", "hunger": 22, "energy": 5, "price": 300, "time": 10},
+    {"name": "Свинина", "hunger": 20, "energy": 3, "price": 250, "time": 10},
+    {"name": "Колбаса", "hunger": 15, "energy": 0, "price": 180, "time": 5},
+    {"name": "Бекон", "hunger": 18, "energy": -5, "price": 220, "time": 5},
+    {"name": "Лосось", "hunger": 15, "energy": 10, "price": 350, "time": 10},
+    {"name": "Тунец", "hunger": 15, "energy": 8, "price": 300, "time": 10},
+    {"name": "Скумбрия", "hunger": 14, "energy": 5, "price": 200, "time": 5},
+    {"name": "Форель", "hunger": 16, "energy": 8, "price": 320, "time": 10},
+    {"name": "Сардины", "hunger": 12, "energy": 5, "price": 150, "time": 5},
+    {"name": "Молоко", "hunger": 10, "energy": 5, "price": 80, "time": 5},
+    {"name": "Йогурт", "hunger": 10, "energy": 5, "price": 100, "time": 5},
+    {"name": "Сыр", "hunger": 12, "energy": 5, "price": 150, "time": 5},
+    {"name": "Масло", "hunger": 8, "energy": 5, "price": 120, "time": 5},
+    {"name": "Кефир", "hunger": 10, "energy": 3, "price": 70, "time": 5},
+    {"name": "Яблоко", "hunger": 8, "energy": 10, "price": 50, "time": 5},
+    {"name": "Груша", "hunger": 8, "energy": 10, "price": 60, "time": 5},
+    {"name": "Апельсин", "hunger": 8, "energy": 12, "price": 70, "time": 5},
+    {"name": "Банан", "hunger": 10, "energy": 15, "price": 80, "time": 5},
+    {"name": "Киви", "hunger": 6, "energy": 10, "price": 60, "time": 5},
+    {"name": "Картошка", "hunger": 10, "energy": 5, "price": 40, "time": 5},
+    {"name": "Помидор", "hunger": 8, "energy": 5, "price": 50, "time": 5},
+    {"name": "Огурец", "hunger": 6, "energy": 3, "price": 30, "time": 5},
+    {"name": "Морковь", "hunger": 8, "energy": 5, "price": 35, "time": 5},
+    {"name": "Лук", "hunger": 6, "energy": 0, "price": 25, "time": 5},
+    {"name": "Пицца", "hunger": 25, "energy": -10, "price": 400, "time": 20},
+    {"name": "Бургер", "hunger": 22, "energy": -8, "price": 250, "time": 15},
+    {"name": "Лапша", "hunger": 20, "energy": -5, "price": 200, "time": 15},
+    {"name": "Суп", "hunger": 20, "energy": 5, "price": 180, "time": 15},
+    {"name": "Пельмени", "hunger": 25, "energy": -5, "price": 280, "time": 20},
+    {"name": "Шоколад", "hunger": 5, "energy": 15, "price": 120, "time": 5},
+    {"name": "Печенье", "hunger": 5, "energy": 10, "price": 80, "time": 5},
+    {"name": "Мармелад", "hunger": 3, "energy": 10, "price": 100, "time": 5},
+    {"name": "Торт", "hunger": 10, "energy": 5, "price": 300, "time": 15},
+    {"name": "Пряник", "hunger": 5, "energy": 8, "price": 60, "time": 5},
+    {"name": "Кофе", "hunger": 0, "energy": 15, "price": 100, "time": 5},
+    {"name": "Чай", "hunger": 0, "energy": 10, "price": 50, "time": 5},
+    {"name": "Сок", "hunger": 5, "energy": 8, "price": 80, "time": 5},
+    {"name": "Лимонад", "hunger": 3, "energy": 5, "price": 60, "time": 5},
+    {"name": "Кола", "hunger": 3, "energy": 8, "price": 70, "time": 5},
+    {"name": "Red Bull", "hunger": -5, "energy": 30, "price": 180, "time": 5},
+    {"name": "Монстр", "hunger": -5, "energy": 28, "price": 200, "time": 5},
+    {"name": "Flash", "hunger": -3, "energy": 25, "price": 150, "time": 5},
+    {"name": "Adrenalin", "hunger": -5, "energy": 30, "price": 220, "time": 5},
+    {"name": "Drive", "hunger": -3, "energy": 25, "price": 160, "time": 5},
+    {"name": "Картошка фри", "hunger": 20, "energy": -15, "price": 150, "time": 10},
+    {"name": "Наггетсы", "hunger": 18, "energy": -10, "price": 200, "time": 10},
+    {"name": "Хот-дог", "hunger": 20, "energy": -10, "price": 120, "time": 10},
+    {"name": "Сэндвич", "hunger": 18, "energy": -5, "price": 130, "time": 10},
+    {"name": "Шаурма", "hunger": 25, "energy": -15, "price": 280, "time": 15},
+    {"name": "Киноа", "hunger": 15, "energy": 20, "price": 350, "time": 10},
+    {"name": "Чиа", "hunger": 10, "energy": 15, "price": 300, "time": 5},
+    {"name": "Спирулина", "hunger": 5, "energy": 10, "price": 400, "time": 5},
+    {"name": "Овес", "hunger": 15, "energy": 10, "price": 150, "time": 5},
+    {"name": "Мюсли", "hunger": 15, "energy": 15, "price": 200, "time": 5},
+    {"name": "Грецкий орех", "hunger": 10, "energy": 15, "price": 180, "time": 5},
+    {"name": "Миндаль", "hunger": 10, "energy": 15, "price": 200, "time": 5},
+    {"name": "Арахис", "hunger": 10, "energy": 10, "price": 120, "time": 5},
+    {"name": "Кешью", "hunger": 10, "energy": 15, "price": 250, "time": 5},
+    {"name": "Фисташки", "hunger": 10, "energy": 12, "price": 220, "time": 5},
     {"name": "Кетчуп", "hunger": 2, "energy": 0, "price": 30, "time": 0},
     {"name": "Майонез", "hunger": 2, "energy": 0, "price": 40, "time": 0},
     {"name": "Горчица", "hunger": 2, "energy": 0, "price": 30, "time": 0},
     {"name": "Соевый", "hunger": 2, "energy": 0, "price": 35, "time": 0},
     {"name": "Барбекю", "hunger": 2, "energy": 0, "price": 45, "time": 0},
-    {"name": "Хлопья", "hunger": 15, "energy": 10, "price": 180, "time": 1},
-    {"name": "Гранола", "hunger": 15, "energy": 15, "price": 220, "time": 1},
-    {"name": "Каша", "hunger": 20, "energy": 10, "price": 120, "time": 2},
-    {"name": "Панкейки", "hunger": 18, "energy": 5, "price": 200, "time": 3},
-    {"name": "Омлет", "hunger": 20, "energy": 10, "price": 150, "time": 3},
-    {"name": "Горошек", "hunger": 10, "energy": -5, "price": 80, "time": 1},
-    {"name": "Кукуруза", "hunger": 10, "energy": -5, "price": 90, "time": 1},
-    {"name": "Фасоль", "hunger": 12, "energy": -5, "price": 100, "time": 1},
-    {"name": "Тушенка", "hunger": 18, "energy": -5, "price": 150, "time": 1},
-    {"name": "Паштет", "hunger": 15, "energy": -3, "price": 120, "time": 1},
+    {"name": "Хлопья", "hunger": 15, "energy": 10, "price": 180, "time": 5},
+    {"name": "Гранола", "hunger": 15, "energy": 15, "price": 220, "time": 5},
+    {"name": "Каша", "hunger": 20, "energy": 10, "price": 120, "time": 10},
+    {"name": "Панкейки", "hunger": 18, "energy": 5, "price": 200, "time": 15},
+    {"name": "Омлет", "hunger": 20, "energy": 10, "price": 150, "time": 15},
+    {"name": "Горошек", "hunger": 10, "energy": -5, "price": 80, "time": 5},
+    {"name": "Кукуруза", "hunger": 10, "energy": -5, "price": 90, "time": 5},
+    {"name": "Фасоль", "hunger": 12, "energy": -5, "price": 100, "time": 5},
+    {"name": "Тушенка", "hunger": 18, "energy": -5, "price": 150, "time": 5},
+    {"name": "Паштет", "hunger": 15, "energy": -3, "price": 120, "time": 5},
     {"name": "Соль", "hunger": 0, "energy": 0, "price": 20, "time": 0},
     {"name": "Перец", "hunger": 0, "energy": 0, "price": 25, "time": 0},
     {"name": "Корица", "hunger": 0, "energy": 0, "price": 30, "time": 0},
     {"name": "Ваниль", "hunger": 0, "energy": 0, "price": 40, "time": 0},
     {"name": "Паприка", "hunger": 0, "energy": 0, "price": 25, "time": 0},
-    {"name": "Пиво", "hunger": 5, "energy": -30, "price": 150, "time": 2},
-    {"name": "Вино", "hunger": 5, "energy": -30, "price": 400, "time": 3},
-    {"name": "Водка", "hunger": 5, "energy": -40, "price": 300, "time": 2},
-    {"name": "Ром", "hunger": 5, "energy": -35, "price": 500, "time": 2},
-    {"name": "Виски", "hunger": 5, "energy": -35, "price": 600, "time": 2},
-    {"name": "Протеин", "hunger": 5, "energy": 10, "price": 400, "time": 1},
-    {"name": "Клетчатка", "hunger": 5, "energy": 5, "price": 300, "time": 1},
-    {"name": "Омега-3", "hunger": 3, "energy": 8, "price": 350, "time": 1},
-    {"name": "Коллаген", "hunger": 3, "energy": 5, "price": 500, "time": 1},
-    {"name": "Витамины", "hunger": 3, "energy": 10, "price": 200, "time": 1},
-    {"name": "Чипсы", "hunger": 3, "energy": 0, "price": 60, "time": 1},
-    {"name": "Сухарики", "hunger": 3, "energy": 0, "price": 40, "time": 1},
-    {"name": "Попкорн", "hunger": 3, "energy": 0, "price": 50, "time": 1},
-    {"name": "Маршмеллоу", "hunger": 3, "energy": 5, "price": 80, "time": 1},
+    {"name": "Пиво", "hunger": 5, "energy": -30, "price": 150, "time": 10},
+    {"name": "Вино", "hunger": 5, "energy": -30, "price": 400, "time": 15},
+    {"name": "Водка", "hunger": 5, "energy": -40, "price": 300, "time": 10},
+    {"name": "Ром", "hunger": 5, "energy": -35, "price": 500, "time": 10},
+    {"name": "Виски", "hunger": 5, "energy": -35, "price": 600, "time": 10},
+    {"name": "Протеин", "hunger": 5, "energy": 10, "price": 400, "time": 5},
+    {"name": "Клетчатка", "hunger": 5, "energy": 5, "price": 300, "time": 5},
+    {"name": "Омега-3", "hunger": 3, "energy": 8, "price": 350, "time": 5},
+    {"name": "Коллаген", "hunger": 3, "energy": 5, "price": 500, "time": 5},
+    {"name": "Витамины", "hunger": 3, "energy": 10, "price": 200, "time": 5},
+    {"name": "Чипсы", "hunger": 3, "energy": 0, "price": 60, "time": 5},
+    {"name": "Сухарики", "hunger": 3, "energy": 0, "price": 40, "time": 5},
+    {"name": "Попкорн", "hunger": 3, "energy": 0, "price": 50, "time": 5},
+    {"name": "Маршмеллоу", "hunger": 3, "energy": 5, "price": 80, "time": 5},
     {"name": "Жевачка", "hunger": 1, "energy": 0, "price": 20, "time": 0},
 ]
 
@@ -131,7 +131,6 @@ LAST_NAMES_MALE = ["Иванов", "Петров", "Сидоров", "Кузне
 LAST_NAMES_FEMALE = ["Иванова", "Петрова", "Сидорова", "Кузнецова", "Смирнова", "Попова", "Волкова", "Козлова", "Морозова", "Новикова",
                      "Соколова", "Лебедева", "Ковалева", "Медведева", "Виноградова", "Белова", "Тарасова", "Крылова", "Орлова", "Мамонтова"]
 
-# 100 способов смерти
 DEATH_METHODS = [
     "🫀 Остановка сердца", "🧠 Инсульт", "🚗 Сбит машиной", "🔥 Пожар", "💧 Утопление",
     "🔪 Ножевое ранение", "💊 Передозировка", "🏢 Падение с высоты", "⚡ Удар током",
@@ -233,32 +232,6 @@ SEASONAL_EVENTS = {
     ]
 }
 
-# ============== СЮЖЕТ ==============
-STORY_EVENTS = [
-    {"day": 1, "text": "Вы нашли тетрадь смерти! Рюк появился перед вами."},
-    {"day": 2, "text": "В новостях сообщают о загадочной смерти криминального авторитета."},
-    {"day": 3, "text": "Интерпол подключился к расследованию. Впервые показывают L."},
-    {"day": 4, "text": "L заявляет: 'Я найду Киру и остановлю его'."},
-    {"day": 5, "text": "L заявил, что Кира находится в России! Это ложный след."},
-    {"day": 6, "text": "Вас останавливает полицейский для проверки документов."},
-    {"day": 7, "text": "L заявил: 'Кира - студент, ему 17-20 лет'. Вы в шоке!"},
-    {"day": 8, "text": "Вы встречаете информатора. Он знает, кто такой L. Но просит 100 000 ₽."},
-    {"day": 9, "text": "Новости: L приближается к разгадке."},
-    {"day": 10, "text": "L даёт пресс-конференцию."},
-    {"day": 11, "text": "Вы следите за полицейскими участками."},
-    {"day": 12, "text": "Информатор: 'Я могу сказать имя L за 100 000 ₽'."},
-    {"day": 13, "text": "Вы узнаёте, что L связан с Ватари и Интерполом."},
-    {"day": 14, "text": "L нанёс удар по преступности."},
-    {"day": 15, "text": "Вы нашли информацию: L также известен как 'L Lawliet'."},
-    {"day": 16, "text": "Информатор: 'У меня есть фото L! Приходи!'"},
-    {"day": 17, "text": "L: 'Кира, я знаю, что ты смотришь меня'."},
-    {"day": 18, "text": "Вы узнали лицо L! Это он — L Lawliet."},
-    {"day": 19, "text": "L намекает, что знает, кто вы."},
-    {"day": 20, "text": "Встреча с L. Вы должны убить его."},
-    {"day": 21, "text": "Вы узнаёте полное имя L: L Lawliet."},
-    {"day": 22, "text": "ФИНАЛ: Вы записываете имя L Lawliet в тетрадь смерти."},
-]
-
 # ============== КЛАСС ИГРЫ ==============
 
 class Game:
@@ -273,7 +246,7 @@ class Game:
         self.title = "Студент"
         self.day = 1
         self.date = datetime(2010, 4, 23)
-        self.time = datetime(2010, 4, 23, 8, 0, 0)  # Текущее время с секундами
+        self.time = datetime(2010, 4, 23, 8, 0, 0)
         self.fridge = []
         self.killed = []
         self.debt = 0
@@ -300,6 +273,8 @@ class Game:
         self.story_triggered = False
         self.contract_available = True
         self.news_hour = 0
+        self.ending = None  # None, "good", "neutral", "bad"
+        self.game_over = False
 
     def get_season(self):
         month = self.date.month
@@ -346,7 +321,9 @@ class Game:
             "story_done": self.story_done,
             "story_triggered": self.story_triggered,
             "active_contract": self.active_contract,
-            "contract_available": self.contract_available
+            "contract_available": self.contract_available,
+            "ending": self.ending,
+            "game_over": self.game_over
         }
         with open("save.json", "w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
@@ -389,6 +366,8 @@ class Game:
         self.story_triggered = data.get("story_triggered", False)
         self.active_contract = data.get("active_contract")
         self.contract_available = data.get("contract_available", True)
+        self.ending = data.get("ending")
+        self.game_over = data.get("game_over", False)
         self.loaded = True
         return True
 
@@ -396,21 +375,17 @@ class Game:
         self.save()
 
     def advance_time(self, minutes, energy_cost=0):
-        """Продвинуть время на N минут, потратить энергию"""
         self.time += timedelta(minutes=minutes)
         self.energy -= energy_cost
         if self.energy < 0:
             self.energy = 0
-        # Проверка на новый день
         if self.time.hour == 0 and self.time.minute == 0 and self.time.second == 0:
             self.new_day()
-        # Генерация новостей каждый час
         if self.time.minute == 0 and self.time.second == 0:
             self.news_hour += 1
             self.generate_hourly_news()
 
     def new_day(self):
-        """Наступление нового дня"""
         self.day += 1
         self.date += timedelta(days=1)
         self.hunger -= random.randint(5, 10)
@@ -457,7 +432,6 @@ class Game:
             self.suspicion = min(self.suspicion, 100)
             if self.fame >= 100:
                 self.title = "Кира - Бог нового мира"
-                print("🌟 ВЫ СТАЛИ КИРОЙ! Мир признаёт вас богом!")
 
         if self.suspicion >= 100:
             self.investigation = True
@@ -469,38 +443,100 @@ class Game:
         self.active_contract = None
 
     def check_story(self):
-        """Проверка сюжетных событий"""
-        if self.story_done:
+        if self.story_done or self.game_over:
             return
-        if self.story_index >= len(STORY_EVENTS):
-            self.story_done = True
-            return
-        event = STORY_EVENTS[self.story_index]
-        if self.day >= event["day"]:
-            if self.story_index == 0 and not self.story_triggered:
-                self.story_triggered = True
-                print("=" * 50)
-                print("📖 СЮЖЕТНОЕ СОБЫТИЕ:")
-                print("=" * 50)
-                print("📓 Вы нашли тетрадь смерти! Рюк появился перед вами.")
-                print("🖊️ 'Это тетрадь смерти. Тот, чьё имя будет вписано, умрёт.'")
-                print("💭 Вы понимаете, что это шанс создать новый мир...")
-                print("💭 Мир без преступников, где правят справедливость и порядок.")
-                print("💭 Вы будете богом этого нового мира. Никто не остановит вас.")
-                print("=" * 50)
-                input("Нажмите Enter чтобы продолжить...")
+        story_events = [
+            {"day": 1, "text": "📓 Вы нашли тетрадь смерти! Рюк появился перед вами."},
+            {"day": 3, "text": "📰 Новости: 'Загадочная смерть криминального авторитета.'"},
+            {"day": 7, "text": "📰 Новости: 'В городе орудует убийца. Прозвище — Кира.'"},
+            {"day": 10, "text": "👤 На улице вы слышите разговор прохожих о Кире."},
+            {"day": 15, "text": "📰 Новости: 'Детектив L вступает в игру.'"},
+            {"day": 22, "text": "📺 L по телевизору: 'Кира, я знаю, что ты смотришь меня.'"},
+            {"day": 30, "text": "💭 Прошёл месяц. L приближается. Но ты готов."},
+            {"day": 45, "text": "📰 Новости: 'L заявляет, что Кира — студент.'"},
+            {"day": 60, "text": "👤 Информатор: 'Я знаю, кто ты, Кира. Я хочу помочь.'"},
+            {"day": 75, "text": "📰 Новости: 'L даёт пресс-конференцию.'"},
+            {"day": 90, "text": "📰 Новости: 'L сузил круг подозреваемых.'"},
+            {"day": 100, "text": "👤 Информатор: 'Я знаю имя L. Но это стоит 100 000 ₽.'"},
+            {"day": 120, "text": "💭 L Lawliet... Теперь у тебя есть имя."},
+            {"day": 150, "text": "📰 Новости: 'L объявляет награду за информацию о Кире.'"},
+            {"day": 180, "text": "👤 Информатор: 'Я знаю, где будет L завтра.'"},
+            {"day": 200, "text": "📰 Новости: 'L мёртв! Мир в шоке!'"},
+            {"day": 220, "text": "👤 Ниа: 'Ты думаешь, что победил, Кира? Это только начало.'"},
+            {"day": 250, "text": "📰 Новости: 'Новый детектив Ниа берётся за дело Киры.'"},
+            {"day": 280, "text": "👤 Миками: 'Вы... Вы Кира? Я хочу помочь вам.'"},
+            {"day": 300, "text": "👤 Миками: 'Ниа создал организацию СПК.'"},
+            {"day": 330, "text": "📰 Новости: 'Ниа: Я не L. Я хуже.'"},
+            {"day": 360, "text": "📰 Новости: 'Ниа приближается к разгадке.'"},
+            {"day": 400, "text": "👤 Миками: 'Я узнал, где находится Ниа.'"},
+            {"day": 420, "text": "👤 Миками: 'Ниа подозревает меня.'"},
+            {"day": 450, "text": "📰 Новости: 'Ниа заявляет, что Кира живёт в Японии.'"},
+            {"day": 480, "text": "👤 Миками: 'Ниа пригласил меня на встречу.'"},
+            {"day": 500, "text": "👤 Миками: 'Ниа ни о чём не догадывается.'"},
+            {"day": 550, "text": "👤 Миками: 'У меня есть план. Заменить тетрадь.'"},
+            {"day": 580, "text": "📰 Новости: 'Ниа уверен, что поймает Киру.'"},
+            {"day": 600, "text": "👤 Миками: 'Я заменил тетрадь. Настоящая у меня.'"},
+            {"day": 620, "text": "👤 Миками: 'Я готов. Я запишу имя Ниа в тетрадь.'"},
+            {"day": 650, "text": "👤 Миками: 'Он подменил тетрадь! Настоящая у него!'"},
+            {"day": 680, "text": "👤 Ниа вызывает тебя на встречу."},
+            {"day": 700, "text": "👤 Ниа: 'Здравствуй, Кира. Или мне называть тебя [Имя игрока]?'"},
+            {"day": 720, "text": "👤 Миками: 'Я убью Ниа. Это последний шанс.'"},
+            {"day": 780, "text": "👤 Миками: 'Всё готово. Завтра я встречусь с Ниа.'"},
+            {"day": 800, "text": "👤 Встреча Миками и Ниа. Решающий момент."},
+        ]
+
+        for event in story_events:
+            if event["day"] == self.day and self.story_index < len(story_events):
                 self.story_index += 1
-            else:
                 print("=" * 50)
-                print(f"📖 СЮЖЕТНОЕ СОБЫТИЕ: День {event['day']}")
+                print(f"📖 СОБЫТИЕ: День {self.day}")
                 print("=" * 50)
                 print(event["text"])
                 print("=" * 50)
-                input("Нажмите Enter чтобы продолжить...")
-                self.story_index += 1
+                if event["day"] == 1 and not self.story_triggered:
+                    self.story_triggered = True
+                    print("📓 'Это тетрадь смерти. Тот, чьё имя будет вписано, умрёт.'")
+                    print("💭 Ты понимаешь: это шанс изменить мир.")
+                input("Нажмите Enter...")
+
+        if self.day >= 850 and self.ending is None:
+            self.trigger_final()
+
+    def trigger_final(self):
+        print("=" * 50)
+        print("💀 ФИНАЛ")
+        print("=" * 50)
+        print("Вы дошли до финала истории!")
+        print("Ваши действия определили судьбу мира.")
+        print("=" * 50)
+
+        if self.l_killed or self.fame >= 100:
+            self.ending = "good"
+            print("🌟 ХОРОШАЯ КОНЦОВКА: Вы победили! Мир ваш!")
+            print("Преступность пала. Вы — бог нового мира.")
+            print("=" * 50)
+            print("💭 'Кажись, я победил, Ниа... 38... 39... 40 секунд! Я победил!'")
+            print("=" * 50)
+        elif self.suspicion >= 100 and self.fame < 100:
+            self.ending = "neutral"
+            print("😐 НЕЙТРАЛЬНАЯ КОНЦОВКА: Вы живы, но мир не ваш.")
+            print("Вы скрываетесь. Вас ищут. Но вы живы.")
+            print("=" * 50)
+            print("💭 'Я проиграл... Но я жив. Это ещё не конец.'")
+            print("=" * 50)
+        else:
+            self.ending = "bad"
+            print("⛓️ ПЛОХАЯ КОНЦОВКА: Вас поймали. Конец.")
+            print("Тюрьма. Мечта о новом мире умерла.")
+            print("=" * 50)
+            print("⛓️ 'Это конец... Я не смог стать богом...'")
+            print("=" * 50)
+
+        input("Нажмите Enter, чтобы продолжить игру...")
+        self.game_over = True
+        self.save()
 
     def generate_hourly_news(self):
-        """Новости каждый час"""
         news_list = [
             "В городе спокойно. Ничего не происходит.",
             "Погода сегодня отличная!",
@@ -546,6 +582,18 @@ class Game:
                 "📰 Новое убийство, совершённое Кирой.",
                 "📰 Кира стал символом справедливости для многих.",
             ])
+        if self.ending == "good":
+            news_list.extend([
+                "🌟 Мир признаёт Киру богом! Преступность падает!",
+                "🌟 Кира создал новый мир без преступников!",
+                "🌟 Войны прекратились. Мир живёт в порядке.",
+            ])
+        elif self.ending == "neutral":
+            news_list.extend([
+                "😐 Кира скрывается. Полиция ищет его.",
+                "😐 Мир не знает, кто такой Кира. Но он всё ещё жив.",
+                "😐 Кира стал легендой. Но его время прошло.",
+            ])
         print(f"📰 {random.choice(news_list)}")
         if self.fame > 0 and random.random() < 0.2:
             print(f"🗣️ Люди вокруг говорят о Кире! Ваша слава растёт.")
@@ -561,6 +609,9 @@ class Game:
         print(f"        📓 ТЕТРАДЬ СМЕРТИ - СИМУЛЯТОР")
         print(f"        👤 {self.player_name}")
         print(f"        📅 {date_str}  ⏰ {time_str}")
+        if self.ending:
+            endings = {"good": "🌟 ПОБЕДА", "neutral": "😐 В БЕГАХ", "bad": "⛓️ ПОРАЖЕНИЕ"}
+            print(f"        🏆 {endings.get(self.ending, '')}")
         print("=" * 50)
         print(f" {status} Здоровье: {self.health}%  |  🍔 Голод: {self.hunger}/100")
         print(f" ⚡ Энергия: {self.energy}/100  |  💰 Деньги: {self.money} ₽")
@@ -705,6 +756,7 @@ class Game:
         print(f"💰 У вас: {self.money} ₽")
         print("1. Заплатить 100 000 ₽")
         print("2. Позвонить позже")
+        print("3. Убить информатора (через тетрадь)")
         choice = input("👉 ")
         if choice == "1":
             if self.money < 100000:
@@ -716,9 +768,16 @@ class Game:
             print("📋 Имя L известно: L Lawliet")
             self.l_name_known = True
             self.advance_time(10, 2)
-        else:
+        elif choice == "2":
             print("📞 'Позвони, когда будут деньги.'")
             self.advance_time(2, 1)
+        elif choice == "3":
+            self.killed.append({"name": "Информатор", "method": "🫀 Остановка сердца"})
+            self.suspicion += 20
+            print("📓 Вы убили информатора.")
+            print("💀 Он мёртв. Ты не узнаешь имя L.")
+            self.informant_met = False
+            self.advance_time(5, 3)
 
     def eat(self):
         if not self.fridge:
@@ -763,7 +822,6 @@ class Game:
             print("❌ Введите число!")
 
     def work(self):
-        pc_level = sum(self.pc_parts.values())
         bonus_money = 0
         for part, level in self.pc_parts.items():
             if part not in ["mouse", "keyboard"]:
@@ -798,7 +856,6 @@ class Game:
 
     def buy_product(self):
         print("🛒 ПРОДУКТОВЫЙ МАГАЗИН")
-        print("Категории:")
         categories = ["Хлебобулочные", "Мясные", "Рыбные", "Молочные", "Фрукты", "Овощи",
                       "Готовые блюда", "Сладости", "Напитки", "Энергетики", "Фастфуд",
                       "Суперфуды", "Орехи", "Соусы", "Завтраки", "Консервы", "Специи",
@@ -982,7 +1039,6 @@ class Game:
                     person = self.known_people[idx]
                     name = f"{person['name']} {person['last']}"
 
-                    # Проверка на L
                     if name == "L Lawliet" or (person['name'] == "L" and person['last'] == ""):
                         if not self.l_name_known:
                             print("❌ Вы не знаете полное имя L! Нужно узнать его.")
@@ -991,7 +1047,6 @@ class Game:
                             print("❌ Вы не знаете лицо L! Нужно увидеть его.")
                             return
 
-                    # Выбор способа смерти
                     print("\n💀 ВЫБЕРИТЕ СПОСОБ СМЕРТИ:")
                     for i, method in enumerate(DEATH_METHODS, 1):
                         print(f"{i}. {method}")
@@ -1009,17 +1064,37 @@ class Game:
                         print("❌ Введите число!")
                         return
 
+                    # Проверка на убийство Миками
+                    if name == "Теру Миками" or (person['name'] == "Миками" and person['last'] == ""):
+                        print("💀 Вы убили Миками!")
+                        self.known_people.remove(person)
+                        self.killed.append({"name": name, "method": method})
+                        self.suspicion += 20
+                        self.advance_time(5, 3)
+                        print("📌 Ниа начнёт расследование быстрее!")
+                        return
+
+                    # Проверка на убийство информатора
+                    if name == "Информатор":
+                        print("💀 Вы убили информатора!")
+                        self.known_people.remove(person)
+                        self.killed.append({"name": name, "method": method})
+                        self.suspicion += 20
+                        self.informant_met = False
+                        self.advance_time(5, 3)
+                        return
+
                     self.killed.append({"name": name, "method": method})
                     self.suspicion += 15
 
                     if name == "L Lawliet":
                         self.l_killed = True
-                        self.fame = 100
+                        self.fame = min(self.fame + 50, 100)
                         self.title = "Кира - Бог нового мира"
                         print(f"✍️ Имя {name} записано в тетрадь.")
                         print(f"💀 Способ: {method}")
                         print("🫀 L умирает...")
-                        print("🌟 МИР ПРИЗНАЁТ ВАС ПОБЕДИТЕЛЕМ!")
+                        print("🌟 L мёртв! Вы победили!")
                         self.advance_time(5, 3)
                         return
 
@@ -1028,18 +1103,18 @@ class Game:
 
                     if self.active_contract and self.active_contract['name'] == person['name'] and self.active_contract['last'] == person['last']:
                         if random.random() < 0.1:
-                            print("❌ Вас обманули! Контракт оказался фальшивкой.")
+                            print("❌ Вас обманули! Контракт фальшивка.")
                             self.suspicion += 15
                             self.active_contract = None
                         else:
                             self.money += self.active_contract['price']
-                            print(f"💰 Вы получили {self.active_contract['price']} ₽ за выполнение контракта!")
+                            print(f"💰 Вы получили {self.active_contract['price']} ₽ за контракт!")
                             self.active_contract = None
                             self.contracts_done += 1
                     else:
                         print("⚠️ Вы убили случайного человека без контракта.")
                         if random.random() < 0.2:
-                            print("📰 Кто-то видел вас! Подозрение сильно выросло!")
+                            print("📰 Кто-то видел вас! Подозрение +20%")
                             self.suspicion += 20
 
                     self.known_people.remove(person)
@@ -1067,10 +1142,10 @@ class Game:
         choice = input("👉 ")
         if choice == "1":
             if not self.contract_available:
-                print("❌ Вы уже взяли контракт сегодня! Ждите следующего дня.")
+                print("❌ Вы уже взяли контракт сегодня!")
                 return
             if self.active_contract:
-                print("❌ У вас уже есть активный контракт! Выполните или откажитесь от него.")
+                print("❌ У вас уже есть активный контракт!")
                 return
             contract = self.generate_contract()
             self.show_contract(contract)
@@ -1124,12 +1199,12 @@ class Game:
                 print(f"💀 Способ: {method}")
 
                 if random.random() < 0.1:
-                    print("❌ Вас обманули! Контракт оказался фальшивкой.")
+                    print("❌ Вас обманули! Контракт фальшивка.")
                     self.suspicion += 15
                     self.active_contract = None
                 else:
                     self.money += self.active_contract['price']
-                    print(f"💰 Вы получили {self.active_contract['price']} ₽ за выполнение контракта!")
+                    print(f"💰 Вы получили {self.active_contract['price']} ₽ за контракт!")
                     self.active_contract = None
                     self.contracts_done += 1
                 self.advance_time(5, 3)
@@ -1173,7 +1248,13 @@ class Game:
             if self.investigation:
                 print("📢 ВНИМАНИЕ! Идёт расследование по делу Киры!")
             if self.l_killed:
-                print("🌟 ВЫ ПОБЕДИЛИ! L мёртв! Мир ваш!")
+                print("🌟 L мёртв! Вы победили!")
+            if self.ending == "good":
+                print("🌟 ВЫ — БОГ НОВОГО МИРА! Игра продолжается...")
+            elif self.ending == "neutral":
+                print("😐 ВЫ В БЕГАХ... Игра продолжается...")
+            elif self.ending == "bad":
+                print("⛓️ ВЫ В ТЮРЬМЕ. Начать заново? (введите 'restart')")
             print("ГЛАВНОЕ МЕНЮ:")
             print("1️⃣  📓 Тетрадь смерти")
             print("2️⃣  📱 Телефон")
@@ -1183,6 +1264,19 @@ class Game:
             print("6️⃣  💾 Сохранить игру")
             print("0️⃣  🚪 Выйти")
             choice = input("👉 ")
+
+            if self.ending == "bad" and choice.lower() == "restart":
+                self.__init__()
+                self.player_name = input("Введите ваше имя: ")
+                print(f"👤 Добро пожаловать, {self.player_name}!")
+                print("📖 23 апреля 2010 года. Вы нашли тетрадь смерти...")
+                self.story_triggered = True
+                self.story_index = 1
+                input("Нажмите Enter чтобы начать...")
+                for _ in range(3):
+                    person = self.generate_person()
+                    self.known_people.append(person)
+                continue
 
             if choice == "1":
                 self.notebook()
@@ -1209,16 +1303,25 @@ class Game:
         print("2️⃣  💸 Взять в долг")
         if self.informant_met and not self.informant_paid and not self.l_killed:
             print("3️⃣  🕵️ Позвонить информатору")
-        print("4️⃣  🔙 Назад")
+            print("4️⃣  🔙 Назад")
+        else:
+            print("3️⃣  🔙 Назад")
         choice = input("👉 ")
+
         if choice == "1":
             self.casino()
         elif choice == "2":
             self.take_debt()
-        elif choice == "3" and self.informant_met and not self.informant_paid and not self.l_killed:
-            self.call_informant()
-        elif choice == "4" or choice == "":
-            return
+        elif choice == "3":
+            if self.informant_met and not self.informant_paid and not self.l_killed:
+                self.call_informant()
+            else:
+                return
+        elif choice == "4":
+            if self.informant_met and not self.informant_paid and not self.l_killed:
+                return
+            else:
+                print("❌ Неверный выбор!")
         else:
             print("❌ Неверный выбор!")
 
@@ -1290,7 +1393,6 @@ def main():
         game.player_name = input("Введите ваше имя: ")
         print(f"👤 Добро пожаловать, {game.player_name}!")
         print("📖 23 апреля 2010 года. Вы нашли тетрадь смерти...")
-        # Первое сюжетное событие
         game.story_triggered = True
         print("=" * 50)
         print("📖 СЮЖЕТНОЕ СОБЫТИЕ:")
@@ -1298,8 +1400,6 @@ def main():
         print("📓 Вы нашли тетрадь смерти! Рюк появился перед вами.")
         print("🖊️ 'Это тетрадь смерти. Тот, чьё имя будет вписано, умрёт.'")
         print("💭 Вы понимаете, что это шанс создать новый мир...")
-        print("💭 Мир без преступников, где правят справедливость и порядок.")
-        print("💭 Вы будете богом этого нового мира. Никто не остановит вас.")
         print("=" * 50)
         game.story_index = 1
         input("Нажмите Enter чтобы начать...")
