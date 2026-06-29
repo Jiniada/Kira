@@ -447,11 +447,14 @@ class Game:
     def auto_save(self):
         self.save()
 
-    def advance_time(self, minutes, energy_cost=0):
+    def advance_time(self, minutes, energy_cost=0, hunger_cost=0):
         self.time += timedelta(minutes=minutes)
         self.energy -= energy_cost
+        self.hunger -= hunger_cost
         if self.energy < 0:
             self.energy = 0
+        if self.hunger < 0:
+            self.hunger = 0
         if self.time.hour == 0 and self.time.minute == 0 and self.time.second == 0:
             self.new_day()
 
@@ -470,24 +473,20 @@ class Game:
         self.check_post_game()
         self.auto_save()
 
-        if self.hunger <= 10:
-            print("❌ Вы упали в голодный обморок! Вас увезли в больницу.")
+        if self.hunger <= 0:
+            print("❌ ВЫ УПАЛИ В ГОЛОДНЫЙ ОБМОРОК!")
+            cost = min(3000, self.money)
+            self.money -= cost
             self.hunger = 50
             self.energy = 30
-            self.money -= 3000
             self.time += timedelta(days=7)
             self.day += 7
-            print(f"🏥 Вы провели неделю в больнице. -3000 ₽")
+            print(f"🏥 Больница: -{cost} ₽. Вы провели неделю в больнице.")
 
-        if self.energy <= random.randint(0, 15):
-            missing = 100 - self.energy
-            minutes = missing * 15
-            print(f"💤 Вы вырубились от усталости на {minutes} минут!")
-            self.energy = 30
-            if random.random() < 0.3:
-                stolen = random.randint(100, 1000)
-                self.money -= stolen
-                print(f"👤 Вас обокрали на {stolen} ₽")
+        if self.energy <= 0:
+            print("💤 ВЫ РУХНУЛИ ОТ УСТАЛОСТИ! Спите 10 часов.")
+            self.energy = 100
+            self.time += timedelta(hours=10)
 
         if self.debt > 0:
             self.debt_days += 1
@@ -542,9 +541,9 @@ class Game:
             self.mafia_war = True
             print("🔫 Мафия объявила вам войну!")
 
-        if self.day >= 900 and not self.girl_met and not self.girl_phone:
+        if self.day >= 2 and not self.girl_met and not self.girl_phone:
             if self.girl_call_day is None:
-                self.girl_call_day = self.day + random.randint(1, 3)
+                self.girl_call_day = self.day + random.randint(1, 1)
             if self.day == self.girl_call_day:
                 self.girl_phone = True
                 print("📱 Вам позвонила девушка! Она хочет встретиться.")
@@ -605,7 +604,7 @@ class Game:
                     self.story_triggered = True
                     print("📓 'Это тетрадь смерти. Тот, чьё имя будет вписано, умрёт.'")
                     print("💭 Ты понимаешь: это шанс изменить мир.")
-                self.advance_time(event.get("time", 15), 5)
+                self.advance_time(event.get("time", 15), 5, 3)
                 input("Нажмите Enter...")
 
         if self.day >= 850 and self.ending is None:
@@ -788,7 +787,7 @@ class Game:
             else:
                 self.money -= bet
                 print(f"😞 Вы проиграли {bet} ₽. У вас {self.money} ₽")
-            self.advance_time(5, 2)
+            self.advance_time(5, 2, 1)
         except ValueError:
             print("❌ Введите число!")
 
@@ -803,7 +802,7 @@ class Game:
             self.debt += amount
             self.debt_days = 0
             print(f"✅ Вы взяли {amount} ₽. Вернуть нужно с 20% через 5 дней.")
-            self.advance_time(5, 1)
+            self.advance_time(5, 1, 1)
         except ValueError:
             print("❌ Введите число!")
 
@@ -833,17 +832,17 @@ class Game:
             print("✅ Информатор: 'Имя L - L Lawliet. Но его лицо я покажу позже.'")
             print("📋 Имя L известно: L Lawliet")
             self.l_name_known = True
-            self.advance_time(10, 2)
+            self.advance_time(10, 2, 1)
         elif choice == "2":
             print("📞 'Позвони, когда будут деньги.'")
-            self.advance_time(2, 1)
+            self.advance_time(2, 1, 1)
         elif choice == "3":
             self.killed.append({"name": "Информатор", "method": "🫀 Остановка сердца"})
             self.suspicion += 20
             print("📓 Вы убили информатора.")
             print("💀 Он мёртв. Ты не узнаешь имя L.")
             self.informant_met = False
-            self.advance_time(5, 3)
+            self.advance_time(5, 3, 2)
 
     def girl_date(self):
         if not self.girl_phone or self.girl_met:
@@ -885,10 +884,10 @@ class Game:
             print("\n💕 Утром она уходит, оставив записку:")
             print("'Я буду скучать по тебе, мой бог. Позвони мне когда-нибудь.'")
             print("=" * 50)
-            self.advance_time(120, 30)
+            self.advance_time(120, 30, 15)
         else:
             print("❌ Она уходит, разочарованная.")
-            self.advance_time(15, 5)
+            self.advance_time(15, 5, 3)
 
     def pay_business_debt(self):
         if self.business_debt <= 0:
@@ -901,7 +900,7 @@ class Game:
         print(f"✅ Долг оплачен! -{self.business_debt} ₽")
         self.business_debt = 0
         self.business_days_left = 7
-        self.advance_time(10, 2)
+        self.advance_time(10, 2, 1)
 
     def buy_business(self):
         print("🏢 ПОКУПКА БИЗНЕСА")
@@ -924,7 +923,7 @@ class Game:
                 self.money -= biz['price']
                 self.businesses.append(biz)
                 print(f"✅ Вы купили {biz['name']}!")
-                self.advance_time(30, 5)
+                self.advance_time(30, 5, 3)
             else:
                 print("❌ Неверный выбор")
         except ValueError:
@@ -941,7 +940,7 @@ class Game:
         self.island = True
         print("🏝️ ПОЗДРАВЛЯЮ! Вы купили личный остров!")
         print("Теперь вы недосягаемы для врагов.")
-        self.advance_time(60, 10)
+        self.advance_time(60, 10, 5)
 
     def eat(self):
         if not self.fridge:
@@ -961,7 +960,7 @@ class Game:
                 if self.energy > 100:
                     self.energy = 100
                 print(f"🍽️ Вы съели {item['name']}!")
-                self.advance_time(item.get('time', 5), 2)
+                self.advance_time(item.get('time', 5), 2, 0)
             else:
                 print("❌ Неверный выбор")
         except ValueError:
@@ -980,7 +979,7 @@ class Game:
             if self.energy > 100:
                 self.energy = 100
             minutes = hours * 60
-            self.advance_time(minutes, 0)
+            self.advance_time(minutes, 0, 0)
             print(f"😴 Вы поспали {hours} часов (+{energy_gain} энергии)")
         except ValueError:
             print("❌ Введите число!")
@@ -1017,7 +1016,7 @@ class Game:
 
             progress_gain = typed_count * char_value
             self.work_progress += progress_gain
-            self.advance_time(typed_count, 0.25 * typed_count)
+            self.advance_time(typed_count, 0.25 * typed_count, 0.1 * typed_count)
 
             print(f"📊 Прогресс: {min(int(self.work_progress), 1000)}/1000 ({min(int(self.work_progress*100//1000), 100)}%)")
             print(f"   (введено {typed_count} символов → +{progress_gain:.1f} к прогрессу)")
@@ -1067,7 +1066,7 @@ class Game:
                     self.money -= item['price']
                     self.fridge.append(item.copy())
                     print(f"✅ Вы купили {item['name']}!")
-                    self.advance_time(10, 3)
+                    self.advance_time(10, 3, 2)
                 else:
                     print("❌ Неверный выбор")
             except ValueError:
@@ -1093,7 +1092,7 @@ class Game:
                 self.money -= part['price']
                 self.pc_parts[part["type"]] = self.pc_parts.get(part["type"], 0) + 1
                 print(f"✅ Вы улучшили {part['name']} до уровня {self.pc_parts[part['type']]}!")
-                self.advance_time(5, 2)
+                self.advance_time(5, 2, 1)
             else:
                 print("❌ Неверный выбор")
         except ValueError:
@@ -1138,7 +1137,7 @@ class Game:
             print(f"🗣️ Люди вокруг говорят о Кире! Ваша слава растёт.")
             self.fame = min(self.fame + 1, 100)
 
-        self.advance_time(60, 15)
+        self.advance_time(60, 15, 10)
 
     def buy_car(self):
         print("🚗 АВТОСАЛОН")
@@ -1158,7 +1157,7 @@ class Game:
                 self.money -= car['price']
                 self.car = car
                 print(f"✅ Вы купили {car['name']}!")
-                self.advance_time(30, 5)
+                self.advance_time(30, 5, 3)
             else:
                 print("❌ Неверный выбор")
         except ValueError:
@@ -1201,7 +1200,7 @@ class Game:
                 self.money -= house['price']
                 self.house = choice + 1
                 print(f"✅ Вы купили {house['name']}!")
-                self.advance_time(30, 5)
+                self.advance_time(30, 5, 3)
             else:
                 print("❌ Неверный выбор")
         except ValueError:
@@ -1278,7 +1277,7 @@ class Game:
                         self.known_people.remove(person)
                         self.killed.append({"name": name, "method": method})
                         self.suspicion += 20
-                        self.advance_time(5, 3)
+                        self.advance_time(5, 3, 2)
                         print("📌 Ниа начнёт расследование быстрее!")
                         return
 
@@ -1288,7 +1287,7 @@ class Game:
                         self.killed.append({"name": name, "method": method})
                         self.suspicion += 20
                         self.informant_met = False
-                        self.advance_time(5, 3)
+                        self.advance_time(5, 3, 2)
                         return
 
                     self.killed.append({"name": name, "method": method})
@@ -1301,7 +1300,7 @@ class Game:
                         print(f"💀 Способ: {method}")
                         print("🫀 L умирает...")
                         print("🌟 L мёртв! Вы победили!")
-                        self.advance_time(5, 3)
+                        self.advance_time(5, 3, 2)
                         return
 
                     print(f"✍️ Имя {name} записано в тетрадь.")
@@ -1324,7 +1323,7 @@ class Game:
                             self.suspicion += 20
 
                     self.known_people.remove(person)
-                    self.advance_time(5, 3)
+                    self.advance_time(5, 3, 2)
                 else:
                     print("❌ Неверный выбор")
             except ValueError:
@@ -1364,10 +1363,10 @@ class Game:
                     self.known_people.append(contract)
                 self.contract_available = False
                 print(f"✅ Контракт принят! Убейте {contract['name']} {contract['last']} через тетрадь.")
-                self.advance_time(10, 3)
+                self.advance_time(10, 3, 2)
             else:
                 print("❌ Отказ от контракта")
-                self.advance_time(5, 1)
+                self.advance_time(5, 1, 1)
         elif choice == "2":
             if not self.active_contract:
                 print("❌ Нет активного контракта!")
@@ -1413,7 +1412,7 @@ class Game:
                     print(f"💰 Вы получили {self.active_contract['price']} ₽ за контракт!")
                     self.active_contract = None
                     self.contracts_done += 1
-                self.advance_time(5, 3)
+                self.advance_time(5, 3, 2)
             else:
                 return
         elif choice == "3":
@@ -1426,7 +1425,7 @@ class Game:
             self.money -= 5000
             print(f"💸 Вы отказались от контракта. Штраф 5000 ₽. У вас {self.money} ₽")
             self.active_contract = None
-            self.advance_time(5, 1)
+            self.advance_time(5, 1, 1)
         elif choice == "4":
             return
 
@@ -1507,7 +1506,7 @@ class Game:
             ])
         print(random.choice(news_list))
         input("Нажмите Enter...")
-        self.advance_time(5, 1)
+        self.advance_time(5, 1, 0)
 
     def main_menu(self):
         while self.running:
@@ -1577,21 +1576,22 @@ class Game:
             print("4️⃣  💰 Оплатить долг бизнеса")
         if self.girl_phone and not self.girl_met:
             print("5️⃣  💕 Свидание")
-        print("6️⃣  🔙 Назад")
+        print("3️⃣  🔙 Назад")
         choice = input("👉 ")
 
         if choice == "1":
             self.casino()
         elif choice == "2":
             self.take_debt()
-        elif choice == "3" and self.informant_met and not self.informant_paid and not self.l_killed:
-            self.call_informant()
+        elif choice == "3":
+            if self.informant_met and not self.informant_paid and not self.l_killed:
+                self.call_informant()
+            else:
+                return
         elif choice == "4" and self.business_debt > 0:
             self.pay_business_debt()
         elif choice == "5" and self.girl_phone and not self.girl_met:
             self.girl_date()
-        elif choice == "6":
-            return
         else:
             print("❌ Неверный выбор!")
 
@@ -1633,7 +1633,7 @@ class Game:
                     repair_cost = self.car.get("repair_cost", 500)
                     print(f"🚗 У вашей машины поломка! Ремонт {repair_cost} ₽")
                     self.money -= repair_cost
-                    self.advance_time(30, 5)
+                    self.advance_time(30, 5, 3)
             self.walk()
         elif choice == "3":
             self.buy_car()
