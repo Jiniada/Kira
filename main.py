@@ -176,6 +176,16 @@ CARS = [
     {"name": "🚗 Bugatti Veyron", "price": 250000, "time_reduce": 60, "energy_reduce": 30, "repair_cost": 5000},
     {"name": "🚗 Tesla Model S", "price": 80000, "time_reduce": 35, "energy_reduce": 15, "repair_cost": 1500},
     {"name": "🚗 Rolls-Royce Phantom", "price": 200000, "time_reduce": 40, "energy_reduce": 20, "repair_cost": 4000},
+    {"name": "🚗 Лада Веста", "price": 12000, "time_reduce": 12, "energy_reduce": 4, "repair_cost": 700},
+    {"name": "🚗 Hyundai Solaris", "price": 18000, "time_reduce": 18, "energy_reduce": 6, "repair_cost": 850},
+    {"name": "🚗 Kia Rio", "price": 20000, "time_reduce": 20, "energy_reduce": 7, "repair_cost": 900},
+    {"name": "🚗 Volkswagen Golf", "price": 25000, "time_reduce": 22, "energy_reduce": 8, "repair_cost": 1000},
+    {"name": "🚗 Subaru Impreza", "price": 35000, "time_reduce": 28, "energy_reduce": 11, "repair_cost": 1300},
+    {"name": "🚗 Lexus RX", "price": 60000, "time_reduce": 32, "energy_reduce": 14, "repair_cost": 1600},
+    {"name": "🚗 Jaguar F-Type", "price": 90000, "time_reduce": 38, "energy_reduce": 17, "repair_cost": 1900},
+    {"name": "🚗 Maserati Ghibli", "price": 110000, "time_reduce": 42, "energy_reduce": 19, "repair_cost": 2100},
+    {"name": "🚗 Aston Martin DB11", "price": 160000, "time_reduce": 48, "energy_reduce": 22, "repair_cost": 2800},
+    {"name": "🚗 McLaren 720S", "price": 220000, "time_reduce": 58, "energy_reduce": 29, "repair_cost": 4500},
 ]
 
 HOUSES = [
@@ -186,6 +196,41 @@ HOUSES = [
     {"name": "🏚️ Квартира в центре", "price": 150000, "energy_bonus": 25},
     {"name": "🏚️ Пентхаус", "price": 300000, "energy_bonus": 35},
     {"name": "🏚️ Особняк", "price": 500000, "energy_bonus": 50},
+    {"name": "🏚️ Студия в спальнике", "price": 8000, "energy_bonus": 3},
+    {"name": "🏚️ Квартира-студия", "price": 20000, "energy_bonus": 7},
+    {"name": "🏚️ Двушка в хрущёвке", "price": 45000, "energy_bonus": 12},
+    {"name": "🏚️ Трёшка в панельке", "price": 70000, "energy_bonus": 17},
+    {"name": "🏚️ Квартира в новостройке", "price": 120000, "energy_bonus": 22},
+    {"name": "🏚️ Апартаменты с видом", "price": 180000, "energy_bonus": 28},
+    {"name": "🏚️ Пентхаус в центре", "price": 350000, "energy_bonus": 40},
+    {"name": "🏚️ Коттедж за городом", "price": 450000, "energy_bonus": 45},
+    {"name": "🏚️ Особняк с бассейном", "price": 600000, "energy_bonus": 55},
+    {"name": "🏚️ Замок в горах", "price": 1000000, "energy_bonus": 70},
+]
+
+BUSINESSES = [
+    {"name": "🌯 Шаурмячная", "price": 15000, "income": 500, "tax": 100, "salary": 200},
+    {"name": "🍕 Пиццерия", "price": 30000, "income": 900, "tax": 200, "salary": 350},
+    {"name": "☕ Кофейня", "price": 50000, "income": 1200, "tax": 300, "salary": 500},
+    {"name": "🍔 Бургерная", "price": 70000, "income": 1600, "tax": 400, "salary": 650},
+    {"name": "🍣 Суши-бар", "price": 100000, "income": 2100, "tax": 500, "salary": 800},
+    {"name": "🍷 Ресторан", "price": 150000, "income": 3000, "tax": 700, "salary": 1200},
+    {"name": "🏋️ Фитнес-клуб", "price": 200000, "income": 3500, "tax": 800, "salary": 1400},
+    {"name": "🎮 Игровой клуб", "price": 250000, "income": 4000, "tax": 900, "salary": 1600},
+    {"name": "📚 Книжный магазин", "price": 300000, "income": 3000, "tax": 700, "salary": 1300},
+    {"name": "🛒 Продуктовый магазин", "price": 350000, "income": 4500, "tax": 1000, "salary": 1800},
+    {"name": "🏨 Отель", "price": 500000, "income": 7000, "tax": 1500, "salary": 2500},
+    {"name": "🏦 Микрофинансовая контора", "price": 600000, "income": 9000, "tax": 2000, "salary": 3000},
+    {"name": "🚗 Автосалон", "price": 800000, "income": 12000, "tax": 2500, "salary": 4000},
+    {"name": "🏭 Завод", "price": 1000000, "income": 15000, "tax": 3000, "salary": 5000},
+    {"name": "🏢 Торговый центр", "price": 2000000, "income": 25000, "tax": 5000, "salary": 8000},
+]
+
+CELEBRITIES = [
+    "Освальд Мосли", "Владимир Путин", "Адольф Гитлер", "Чарли Чаплин",
+    "Денис Жуков", "Алексей Навальный", "Александр Пушкин", "Иван Грозный",
+    "Пётр I", "Екатерина II", "Владимир Ленин", "Иосиф Сталин",
+    "Никита Хрущёв", "Леонид Брежнев", "Михаил Горбачёв"
 ]
 
 EVENTS = [
@@ -242,7 +287,6 @@ class Game:
         self.energy = 70
         self.suspicion = 0
         self.fame = 0
-        self.title = "Студент"
         self.day = 1
         self.date = datetime(2010, 4, 23)
         self.time = datetime(2010, 4, 23, 8, 0, 0)
@@ -251,7 +295,6 @@ class Game:
         self.debt = 0
         self.debt_days = 0
         self.investigation = False
-        self.kira_news = False
         self.running = True
         self.loaded = False
         self.active_contract = None
@@ -272,7 +315,19 @@ class Game:
         self.contract_available = True
         self.ending = None
         self.game_over = False
-        self.work_progress = 0  # Прогресс легальной работы
+        self.work_progress = 0
+        self.businesses = []
+        self.business_debt = 0
+        self.business_days_left = 7
+        self.island = False
+        self.mafia_war = False
+        self.mafia_killed = 0
+        self.detective_hunt = False
+        self.detective_count = 0
+        self.girl_call_day = None
+        self.girl_met = False
+        self.girl_phone = False
+        self.celebrity_contracts = False
 
     def get_season(self):
         month = self.date.month
@@ -293,7 +348,6 @@ class Game:
             "energy": self.energy,
             "suspicion": self.suspicion,
             "fame": self.fame,
-            "title": self.title,
             "day": self.day,
             "date": self.date.isoformat(),
             "time": self.time.isoformat(),
@@ -302,7 +356,6 @@ class Game:
             "debt": self.debt,
             "debt_days": self.debt_days,
             "investigation": self.investigation,
-            "kira_news": self.kira_news,
             "known_people": self.known_people,
             "news_count": self.news_count,
             "contracts_done": self.contracts_done,
@@ -321,7 +374,19 @@ class Game:
             "contract_available": self.contract_available,
             "ending": self.ending,
             "game_over": self.game_over,
-            "work_progress": self.work_progress
+            "work_progress": self.work_progress,
+            "businesses": self.businesses,
+            "business_debt": self.business_debt,
+            "business_days_left": self.business_days_left,
+            "island": self.island,
+            "mafia_war": self.mafia_war,
+            "mafia_killed": self.mafia_killed,
+            "detective_hunt": self.detective_hunt,
+            "detective_count": self.detective_count,
+            "girl_call_day": self.girl_call_day,
+            "girl_met": self.girl_met,
+            "girl_phone": self.girl_phone,
+            "celebrity_contracts": self.celebrity_contracts
         }
         with open("save.json", "w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
@@ -337,7 +402,6 @@ class Game:
         self.energy = data["energy"]
         self.suspicion = data["suspicion"]
         self.fame = data.get("fame", 0)
-        self.title = data["title"]
         self.day = data["day"]
         self.date = datetime.fromisoformat(data["date"])
         self.time = datetime.fromisoformat(data.get("time", data["date"] + "T08:00:00"))
@@ -346,7 +410,6 @@ class Game:
         self.debt = data["debt"]
         self.debt_days = data["debt_days"]
         self.investigation = data["investigation"]
-        self.kira_news = data["kira_news"]
         self.known_people = data.get("known_people", [])
         self.news_count = data.get("news_count", 0)
         self.contracts_done = data.get("contracts_done", 0)
@@ -366,6 +429,18 @@ class Game:
         self.ending = data.get("ending")
         self.game_over = data.get("game_over", False)
         self.work_progress = data.get("work_progress", 0)
+        self.businesses = data.get("businesses", [])
+        self.business_debt = data.get("business_debt", 0)
+        self.business_days_left = data.get("business_days_left", 7)
+        self.island = data.get("island", False)
+        self.mafia_war = data.get("mafia_war", False)
+        self.mafia_killed = data.get("mafia_killed", 0)
+        self.detective_hunt = data.get("detective_hunt", False)
+        self.detective_count = data.get("detective_count", 0)
+        self.girl_call_day = data.get("girl_call_day")
+        self.girl_met = data.get("girl_met", False)
+        self.girl_phone = data.get("girl_phone", False)
+        self.celebrity_contracts = data.get("celebrity_contracts", False)
         self.loaded = True
         return True
 
@@ -391,6 +466,8 @@ class Game:
             self.energy = 0
         self.contract_available = True
         self.check_story()
+        self.check_businesses()
+        self.check_post_game()
         self.auto_save()
 
         if self.hunger <= 10:
@@ -420,61 +497,100 @@ class Game:
                 self.debt_days = 0
                 print("⚠️ Вы не вернули долг! Подозрение +10%")
 
-        if self.suspicion >= 100 and self.fame < 100:
-            self.fame = min(self.fame + 1, 100)
-            self.suspicion = min(self.suspicion, 100)
-            if self.fame >= 100:
-                self.title = "Кира - Бог нового мира"
-
         if self.suspicion >= 100:
             self.investigation = True
-            self.title = "Кира"
-            if not self.kira_news:
-                self.kira_news = True
 
         self.active_contract = None
+
+    def check_businesses(self):
+        if not self.businesses:
+            return
+
+        total_income = 0
+        total_tax = 0
+        total_salary = 0
+
+        for biz in self.businesses:
+            total_income += biz["income"]
+            total_tax += biz["tax"]
+            total_salary += biz["salary"]
+
+        self.money += total_income
+        print(f"💰 Бизнесы принесли: +{total_income} ₽")
+
+        if self.day % 30 == 0:
+            total_cost = total_tax + total_salary
+            if self.money >= total_cost:
+                self.money -= total_cost
+                print(f"💸 Оплачены налоги и зарплаты: -{total_cost} ₽")
+            else:
+                self.business_debt = total_cost
+                self.business_days_left = 7
+                print(f"⚠️ У вас недостаточно денег! Долг: {total_cost} ₽")
+                print("📱 В телефоне появилась опция оплаты долга")
+
+    def check_post_game(self):
+        if self.day < 850 or not self.ending:
+            return
+
+        if self.day % 10 == 0 and self.detective_count < 10:
+            self.detective_hunt = True
+            self.detective_count += 1
+            print(f"🔍 Детектив #{self.detective_count} начал расследование!")
+
+        if self.day >= 1000 and not self.mafia_war and self.mafia_killed == 0:
+            self.mafia_war = True
+            print("🔫 Мафия объявила вам войну!")
+
+        if self.day >= 900 and not self.girl_met and not self.girl_phone:
+            if self.girl_call_day is None:
+                self.girl_call_day = self.day + random.randint(1, 3)
+            if self.day == self.girl_call_day:
+                self.girl_phone = True
+                print("📱 Вам позвонила девушка! Она хочет встретиться.")
+                print("📞 В телефоне есть опция 'Свидание'")
 
     def check_story(self):
         if self.story_done or self.game_over:
             return
         story_events = [
-            {"day": 1, "text": "📓 Вы нашли тетрадь смерти! Рюк появился перед вами."},
-            {"day": 3, "text": "📰 Новости: 'Загадочная смерть криминального авторитета.'"},
-            {"day": 7, "text": "📰 Новости: 'В городе орудует убийца. Прозвище — Кира.'"},
-            {"day": 10, "text": "👤 На улице вы слышите разговор прохожих о Кире."},
-            {"day": 15, "text": "📰 Новости: 'Детектив L вступает в игру.'"},
-            {"day": 22, "text": "📺 L по телевизору: 'Кира, я знаю, что ты смотришь меня.'"},
-            {"day": 30, "text": "💭 Прошёл месяц. L приближается."},
-            {"day": 45, "text": "📰 Новости: 'L заявляет, что Кира — студент.'"},
-            {"day": 60, "text": "👤 Информатор: 'Я знаю, кто ты, Кира. Я хочу помочь.'"},
-            {"day": 75, "text": "📰 Новости: 'L даёт пресс-конференцию.'"},
-            {"day": 90, "text": "📰 Новости: 'L сузил круг подозреваемых.'"},
-            {"day": 100, "text": "👤 Информатор: 'Я знаю имя L. Но это стоит 100 000 ₽.'"},
-            {"day": 120, "text": "💭 L Lawliet... Теперь у тебя есть имя."},
-            {"day": 150, "text": "📰 Новости: 'L объявляет награду за информацию о Кире.'"},
-            {"day": 180, "text": "👤 Информатор: 'Я знаю, где будет L завтра.'"},
-            {"day": 200, "text": "📰 Новости: 'L мёртв! Мир в шоке!'"},
-            {"day": 220, "text": "👤 Ниа: 'Ты думаешь, что победил, Кира? Это только начало.'"},
-            {"day": 250, "text": "📰 Новости: 'Новый детектив Ниа берётся за дело Киры.'"},
-            {"day": 280, "text": "👤 Миками: 'Вы... Вы Кира? Я хочу помочь вам.'"},
-            {"day": 300, "text": "👤 Миками: 'Ниа создал организацию СПК.'"},
-            {"day": 330, "text": "📰 Новости: 'Ниа: Я не L. Я хуже.'"},
-            {"day": 360, "text": "📰 Новости: 'Ниа приближается к разгадке.'"},
-            {"day": 400, "text": "👤 Миками: 'Я узнал, где находится Ниа.'"},
-            {"day": 420, "text": "👤 Миками: 'Ниа подозревает меня.'"},
-            {"day": 450, "text": "📰 Новости: 'Ниа заявляет, что Кира живёт в Японии.'"},
-            {"day": 480, "text": "👤 Миками: 'Ниа пригласил меня на встречу.'"},
-            {"day": 500, "text": "👤 Миками: 'Ниа ни о чём не догадывается.'"},
-            {"day": 550, "text": "👤 Миками: 'У меня есть план. Заменить тетрадь.'"},
-            {"day": 580, "text": "📰 Новости: 'Ниа уверен, что поймает Киру.'"},
-            {"day": 600, "text": "👤 Миками: 'Я заменил тетрадь. Настоящая у меня.'"},
-            {"day": 620, "text": "👤 Миками: 'Я готов. Я запишу имя Ниа в тетрадь.'"},
-            {"day": 650, "text": "👤 Миками: 'Он подменил тетрадь! Настоящая у него!'"},
-            {"day": 680, "text": "👤 Ниа вызывает тебя на встречу."},
-            {"day": 700, "text": "👤 Ниа: 'Здравствуй, Кира.'"},
-            {"day": 720, "text": "👤 Миками: 'Я убью Ниа. Это последний шанс.'"},
-            {"day": 780, "text": "👤 Миками: 'Всё готово. Завтра я встречусь с Ниа.'"},
-            {"day": 800, "text": "👤 Встреча Миками и Ниа. Решающий момент."},
+            {"day": 1, "text": "📓 Вы нашли тетрадь смерти! Рюк появился перед вами.", "time": 10},
+            {"day": 3, "text": "📰 Новости: 'Загадочная смерть криминального авторитета.'", "time": 5},
+            {"day": 7, "text": "📰 Новости: 'В городе орудует убийца. Прозвище — Кира.'", "time": 5},
+            {"day": 10, "text": "👤 На улице вы слышите разговор прохожих о Кире.", "time": 10},
+            {"day": 15, "text": "📰 Новости: 'Детектив L вступает в игру.'", "time": 5},
+            {"day": 22, "text": "📺 L по телевизору: 'Кира, я знаю, что ты смотришь меня.'", "time": 30},
+            {"day": 30, "text": "💭 Прошёл месяц. L приближается.", "time": 5},
+            {"day": 45, "text": "📰 Новости: 'L заявляет, что Кира — студент.'", "time": 5},
+            {"day": 60, "text": "👤 Информатор: 'Я знаю, кто ты, Кира. Я хочу помочь.'", "time": 15},
+            {"day": 75, "text": "📰 Новости: 'L даёт пресс-конференцию.'", "time": 5},
+            {"day": 90, "text": "📰 Новости: 'L сузил круг подозреваемых.'", "time": 5},
+            {"day": 100, "text": "👤 Информатор: 'Я знаю имя L. Но это стоит 100 000 ₽.'", "time": 15},
+            {"day": 120, "text": "💭 L Lawliet... Теперь у тебя есть имя.", "time": 5},
+            {"day": 150, "text": "📰 Новости: 'L объявляет награду за информацию о Кире.'", "time": 5},
+            {"day": 180, "text": "👤 Информатор: 'Я знаю, где будет L завтра.'", "time": 15},
+            {"day": 200, "text": "📰 Новости: 'L мёртв! Мир в шоке!'", "time": 5},
+            {"day": 220, "text": "👤 Ниа: 'Ты думаешь, что победил, Кира? Это только начало.'", "time": 10},
+            {"day": 250, "text": "📰 Новости: 'Новый детектив Ниа берётся за дело Киры.'", "time": 5},
+            {"day": 280, "text": "👤 Миками: 'Вы... Вы Кира? Я хочу помочь вам.'", "time": 20},
+            {"day": 300, "text": "👤 Миками: 'Ниа создал организацию СПК.'", "time": 15},
+            {"day": 330, "text": "📰 Новости: 'Ниа: Я не L. Я хуже.'", "time": 5},
+            {"day": 360, "text": "📰 Новости: 'Ниа приближается к разгадке.'", "time": 5},
+            {"day": 400, "text": "👤 Миками: 'Я узнал, где находится Ниа.'", "time": 15},
+            {"day": 420, "text": "👤 Миками: 'Ниа подозревает меня.'", "time": 15},
+            {"day": 450, "text": "📰 Новости: 'Ниа заявляет, что Кира живёт в Японии.'", "time": 5},
+            {"day": 480, "text": "👤 Миками: 'Ниа пригласил меня на встречу.'", "time": 20},
+            {"day": 500, "text": "👤 Миками: 'Ниа ни о чём не догадывается.'", "time": 10},
+            {"day": 550, "text": "👤 Миками: 'У меня есть план. Заменить тетрадь.'", "time": 20},
+            {"day": 580, "text": "📰 Новости: 'Ниа уверен, что поймает Киру.'", "time": 5},
+            {"day": 600, "text": "👤 Миками: 'Я заменил тетрадь. Настоящая у меня.'", "time": 15},
+            {"day": 620, "text": "👤 Миками: 'Я готов. Я запишу имя Ниа в тетрадь.'", "time": 10},
+            {"day": 650, "text": "👤 Миками: 'Он подменил тетрадь! Настоящая у него!'", "time": 15},
+            {"day": 680, "text": "👤 Ниа вызывает тебя на встречу.", "time": 10},
+            {"day": 700, "text": "👤 Ниа: 'Здравствуй, Кира.'", "time": 20},
+            {"day": 720, "text": "👤 Миками: 'Я убью Ниа. Это последний шанс.'", "time": 15},
+            {"day": 780, "text": "👤 Миками: 'Всё готово. Завтра я встречусь с Ниа.'", "time": 15},
+            {"day": 800, "text": "👤 Встреча Миками и Ниа. Решающий момент.", "time": 30},
         ]
 
         for event in story_events:
@@ -489,6 +605,7 @@ class Game:
                     self.story_triggered = True
                     print("📓 'Это тетрадь смерти. Тот, чьё имя будет вписано, умрёт.'")
                     print("💭 Ты понимаешь: это шанс изменить мир.")
+                self.advance_time(event.get("time", 15), 5)
                 input("Нажмите Enter...")
 
         if self.day >= 850 and self.ending is None:
@@ -537,15 +654,16 @@ class Game:
         if self.ending:
             endings = {"good": "🌟 ПОБЕДА", "neutral": "😐 В БЕГАХ", "bad": "⛓️ ПОРАЖЕНИЕ"}
             print(f"        🏆 {endings.get(self.ending, '')}")
+        if self.island:
+            print("        🏝️ ВЛАДЕЛЕЦ ОСТРОВА")
         print("=" * 50)
         print(f" 🍔 Голод: {self.hunger}/100  |  ⚡ Энергия: {self.energy}/100")
         print(f" 💰 Деньги: {self.money} ₽")
-        if self.fame > 0:
-            print(f" ⭐ Слава: {self.fame}%  |  🏆 Звание: {self.title}")
-        else:
-            print(f" 🕵️ Подозрение: {self.suspicion}%  |  🏆 Звание: {self.title}")
+        print(f" 🕵️ Подозрение: {self.suspicion}%  |  ⭐ Слава: {self.fame}%")
         if self.debt > 0:
             print(f" 💸 Долг: {self.debt} ₽ (осталось {5 - self.debt_days} дней)")
+        if self.business_debt > 0:
+            print(f" 💸 Долг бизнеса: {self.business_debt} ₽ (осталось дней: {self.business_days_left})")
         if self.fridge:
             print(f" 🧊 В холодильнике: {len(self.fridge)} продуктов")
         if self.active_contract:
@@ -560,6 +678,12 @@ class Game:
             print(f" 👤 Лицо L известно")
         if self.l_killed:
             print(f" 💀 L мёртв!")
+        if self.businesses:
+            print(f" 🏢 Бизнесов: {len(self.businesses)}")
+        if self.mafia_war:
+            print(f" 🔫 Война с мафией! Убито боссов: {self.mafia_killed}")
+        if self.detective_hunt:
+            print(f" 🔍 Охота на детективов: {self.detective_count} найдено")
         pc_level = sum(self.pc_parts.values())
         if pc_level > 0:
             print(f" 💻 Уровень ПК: {pc_level}")
@@ -587,12 +711,27 @@ class Game:
             "Беглый заключённый.",
             "Шпион."
         ])
+        if random.random() < 0.05 and CELEBRITIES:
+            celeb = random.choice(CELEBRITIES)
+            name_parts = celeb.split()
+            if len(name_parts) >= 2:
+                name = name_parts[0]
+                last = name_parts[1]
+                bio = f"{celeb}. Знаменитость."
         return {"name": name, "last": last, "age": age, "gender": gender, "bio": bio}
 
     def generate_contract(self):
         person = self.generate_person()
-        price = random.randint(2000, 10000)
-        person["price"] = price
+        if random.random() < 0.1 and CELEBRITIES:
+            celeb = random.choice(CELEBRITIES)
+            name_parts = celeb.split()
+            if len(name_parts) >= 2:
+                person["name"] = name_parts[0]
+                person["last"] = name_parts[1]
+                person["bio"] = f"{celeb}. Знаменитость."
+                person["price"] = random.randint(5000, 20000)
+        else:
+            person["price"] = random.randint(2000, 10000)
         return person
 
     def show_contract(self, contract):
@@ -706,6 +845,104 @@ class Game:
             self.informant_met = False
             self.advance_time(5, 3)
 
+    def girl_date(self):
+        if not self.girl_phone or self.girl_met:
+            print("❌ Свидание недоступно.")
+            return
+        print("=" * 50)
+        print("💕 СВИДАНИЕ")
+        print("=" * 50)
+        print("Вы встречаетесь с девушкой в кафе. Она красивая, с карими глазами.")
+        print("💬 Она: 'Ты Кира, да? Я следила за тобой.'")
+        print("💬 'Я узнала твой номер через информатора. Ты мне интересен.'")
+        print("💬 'Давай поедем к тебе? Я хочу узнать тебя ближе.'")
+
+        print("\n📌 ВЫБОР:")
+        print("1. 'Да, поехали ко мне.'")
+        print("2. 'Нет, я не хочу.'")
+        choice = input("👉 ")
+
+        if choice == "1":
+            print("=" * 50)
+            print("🍷 ДОМА")
+            print("=" * 50)
+            print("Вы приехали к себе. Выпили вино, разговорились.")
+            print("💬 Она: 'Ты не просто Кира. Ты — бог.'")
+            print("💬 'И я хочу быть рядом с богом.'")
+            print("🔥 Она целует тебя. Страстно.")
+            print("🛏️ Вы переходите в спальню.")
+            print("💋 Постельная сцена:")
+            print("🔥 Она стягивает с тебя рубашку, проводит рукой по груди.")
+            print("🔥 Её тело изгибается под тобой, она стонет.")
+            print("🔥 Ты входишь в неё, она вскрикивает от удовольствия.")
+            print("🔥 'Да... Ещё...' — шепчет она.")
+            print("🔥 Вы двигаетесь в такт, ритм ускоряется.")
+            print("💦 Она кончает с громким стоном, ты — следом.")
+            print("💤 После — она прижимается к тебе и засыпает.")
+
+            self.girl_met = True
+            self.fame += 5
+            print("\n💕 Утром она уходит, оставив записку:")
+            print("'Я буду скучать по тебе, мой бог. Позвони мне когда-нибудь.'")
+            print("=" * 50)
+            self.advance_time(120, 30)
+        else:
+            print("❌ Она уходит, разочарованная.")
+            self.advance_time(15, 5)
+
+    def pay_business_debt(self):
+        if self.business_debt <= 0:
+            print("❌ У вас нет долга по бизнесам.")
+            return
+        if self.money < self.business_debt:
+            print(f"❌ Недостаточно денег! Нужно: {self.business_debt} ₽")
+            return
+        self.money -= self.business_debt
+        print(f"✅ Долг оплачен! -{self.business_debt} ₽")
+        self.business_debt = 0
+        self.business_days_left = 7
+        self.advance_time(10, 2)
+
+    def buy_business(self):
+        print("🏢 ПОКУПКА БИЗНЕСА")
+        for i, biz in enumerate(BUSINESSES, 1):
+            owned = " ✅ (есть)" if biz in self.businesses else ""
+            print(f"{i}. {biz['name']} | Цена: {biz['price']} ₽ | Доход: {biz['income']} ₽/день | Налоги: {biz['tax']} ₽ | ЗП: {biz['salary']} ₽{owned}")
+        print("0. Назад")
+        try:
+            choice = int(input("Выберите бизнес (0 - назад): ")) - 1
+            if choice == -1:
+                return
+            if 0 <= choice < len(BUSINESSES):
+                biz = BUSINESSES[choice]
+                if biz in self.businesses:
+                    print("❌ У вас уже есть этот бизнес!")
+                    return
+                if self.money < biz['price']:
+                    print("❌ Недостаточно денег!")
+                    return
+                self.money -= biz['price']
+                self.businesses.append(biz)
+                print(f"✅ Вы купили {biz['name']}!")
+                self.advance_time(30, 5)
+            else:
+                print("❌ Неверный выбор")
+        except ValueError:
+            print("❌ Введите число!")
+
+    def buy_island(self):
+        if self.island:
+            print("❌ У вас уже есть остров!")
+            return
+        if self.money < 5000000:
+            print(f"❌ Недостаточно денег! Нужно 5 000 000 ₽. У вас: {self.money}")
+            return
+        self.money -= 5000000
+        self.island = True
+        print("🏝️ ПОЗДРАВЛЯЮ! Вы купили личный остров!")
+        print("Теперь вы недосягаемы для врагов.")
+        self.advance_time(60, 10)
+
     def eat(self):
         if not self.fridge:
             print("🍔 Холодильник пуст. Купите продукты!")
@@ -754,14 +991,14 @@ class Game:
             if part not in ["mouse", "keyboard"]:
                 bonus_money += level
 
-        char_bonus = (self.pc_parts.get("mouse", 0) + self.pc_parts.get("keyboard", 0)) * 0.1
-        total_char_value = 1.0 + char_bonus
+        speed_bonus = (self.pc_parts.get("mouse", 0) + self.pc_parts.get("keyboard", 0)) * 0.1
+        char_value = 1.0 + speed_bonus
 
         print(f"💻 ЛЕГАЛЬНАЯ РАБОТА")
         print(f"📊 Прогресс: {self.work_progress}/1000 символов")
         print(f"💰 База: 500 ₽ за 1000 символов")
-        print(f"💻 Бонус от ПК: +{bonus_money} ₽")
-        print(f"🖱️ Бонус от мыши/клавиатуры: символ x{total_char_value:.1f}")
+        print(f"💻 Бонус от ПК: +{bonus_money} ₽ к награде")
+        print(f"🖱️ Бонус от мыши/клавиатуры: каждый символ засчитывается как x{char_value:.1f}")
         print(f"💰 Итого за 1000 символов: {int(500 + bonus_money)} ₽")
         print("Введите 'stop' чтобы выйти и сохранить прогресс")
         print("Введите любой символ чтобы продолжить печатать...")
@@ -773,11 +1010,17 @@ class Game:
                 self.auto_save()
                 return
 
-            # Каждый введённый символ засчитывается как 1 (с бонусом)
-            typed = total_char_value
-            self.work_progress += typed
-            self.advance_time(1, 0.25)
+            typed_count = len(cmd)
+            if typed_count == 0:
+                print("❌ Введите хоть что-то!")
+                continue
+
+            progress_gain = typed_count * char_value
+            self.work_progress += progress_gain
+            self.advance_time(typed_count, 0.25 * typed_count)
+
             print(f"📊 Прогресс: {min(int(self.work_progress), 1000)}/1000 ({min(int(self.work_progress*100//1000), 100)}%)")
+            print(f"   (введено {typed_count} символов → +{progress_gain:.1f} к прогрессу)")
 
             if self.work_progress >= 1000:
                 reward = int(500 + bonus_money)
@@ -923,6 +1166,25 @@ class Game:
 
     def buy_house(self):
         print("🏠 НЕДВИЖИМОСТЬ")
+        print("1️⃣ Купить жильё")
+        print("2️⃣ Купить бизнес")
+        print("3️⃣ Купить остров")
+        print("4️⃣ Просмотр")
+        print("5️⃣ Назад")
+        choice = input("👉 ")
+        if choice == "1":
+            self._buy_house()
+        elif choice == "2":
+            self.buy_business()
+        elif choice == "3":
+            self.buy_island()
+        elif choice == "4":
+            self._view_property()
+        elif choice == "5":
+            return
+
+    def _buy_house(self):
+        print("🏠 ПОКУПКА ЖИЛЬЯ")
         for i, house in enumerate(HOUSES, 1):
             current = " ✅ (ваша)" if self.house == i else ""
             print(f"{i}. {house['name']} | Цена: {house['price']} ₽ | Бонус к энергии сна: +{house['energy_bonus']}%{current}")
@@ -944,6 +1206,26 @@ class Game:
                 print("❌ Неверный выбор")
         except ValueError:
             print("❌ Введите число!")
+
+    def _view_property(self):
+        print("📋 ВАША СОБСТВЕННОСТЬ")
+        if self.house > 0:
+            print(f"🏠 Жильё: {HOUSES[self.house-1]['name']}")
+        else:
+            print("🏠 Жилья нет")
+        if self.businesses:
+            print("🏢 Бизнесы:")
+            for biz in self.businesses:
+                print(f"  {biz['name']} | Доход: {biz['income']} ₽/день")
+        else:
+            print("🏢 Бизнесов нет")
+        if self.island:
+            print("🏝️ Личный остров есть!")
+        else:
+            print("🏝️ Острова нет")
+        if self.car:
+            print(f"🚗 Машина: {self.car['name']}")
+        input("Нажмите Enter...")
 
     def notebook(self):
         print("📓 ТЕТРАДЬ СМЕРТИ")
@@ -991,7 +1273,6 @@ class Game:
                         print("❌ Введите число!")
                         return
 
-                    # Проверка на убийство Миками
                     if name == "Теру Миками" or (person['name'] == "Миками" and person['last'] == ""):
                         print("💀 Вы убили Миками!")
                         self.known_people.remove(person)
@@ -1001,7 +1282,6 @@ class Game:
                         print("📌 Ниа начнёт расследование быстрее!")
                         return
 
-                    # Проверка на убийство информатора
                     if name == "Информатор":
                         print("💀 Вы убили информатора!")
                         self.known_people.remove(person)
@@ -1017,7 +1297,6 @@ class Game:
                     if name == "L Lawliet":
                         self.l_killed = True
                         self.fame = min(self.fame + 50, 100)
-                        self.title = "Кира - Бог нового мира"
                         print(f"✍️ Имя {name} записано в тетрадь.")
                         print(f"💀 Способ: {method}")
                         print("🫀 L умирает...")
@@ -1238,7 +1517,7 @@ class Game:
             if self.l_killed:
                 print("🌟 L мёртв! Вы победили!")
             if self.ending == "good":
-                print("🌟 ВЫ — БОГ НОВОГО МИРА! Игра продолжается...")
+                print("🌟 ВЫ ПОБЕДИЛИ! Игра продолжается...")
             elif self.ending == "neutral":
                 print("😐 ВЫ В БЕГАХ... Игра продолжается...")
             elif self.ending == "bad":
@@ -1250,6 +1529,7 @@ class Game:
             print("4️⃣  💻 Компьютер")
             print("5️⃣  🚶 Гулять по городу")
             print("6️⃣  💾 Сохранить игру")
+            print("7️⃣  🏠 Недвижимость")
             print("0️⃣  🚪 Выйти")
             choice = input("👉 ")
 
@@ -1279,6 +1559,8 @@ class Game:
             elif choice == "6":
                 self.save()
                 print("💾 Игра сохранена!")
+            elif choice == "7":
+                self.buy_house()
             elif choice == "0":
                 self.running = False
                 print("🚪 Выход из игры...")
@@ -1291,25 +1573,25 @@ class Game:
         print("2️⃣  💸 Взять в долг")
         if self.informant_met and not self.informant_paid and not self.l_killed:
             print("3️⃣  🕵️ Позвонить информатору")
-            print("4️⃣  🔙 Назад")
-        else:
-            print("3️⃣  🔙 Назад")
+        if self.business_debt > 0:
+            print("4️⃣  💰 Оплатить долг бизнеса")
+        if self.girl_phone and not self.girl_met:
+            print("5️⃣  💕 Свидание")
+        print("6️⃣  🔙 Назад")
         choice = input("👉 ")
 
         if choice == "1":
             self.casino()
         elif choice == "2":
             self.take_debt()
-        elif choice == "3":
-            if self.informant_met and not self.informant_paid and not self.l_killed:
-                self.call_informant()
-            else:
-                return
-        elif choice == "4":
-            if self.informant_met and not self.informant_paid and not self.l_killed:
-                return
-            else:
-                print("❌ Неверный выбор!")
+        elif choice == "3" and self.informant_met and not self.informant_paid and not self.l_killed:
+            self.call_informant()
+        elif choice == "4" and self.business_debt > 0:
+            self.pay_business_debt()
+        elif choice == "5" and self.girl_phone and not self.girl_met:
+            self.girl_date()
+        elif choice == "6":
+            return
         else:
             print("❌ Неверный выбор!")
 
@@ -1337,8 +1619,7 @@ class Game:
         print("1️⃣  🛒 Продуктовый магазин")
         print("2️⃣  🚶 Просто гулять")
         print("3️⃣  🚗 Автосалон")
-        print("4️⃣  🏠 Недвижимость")
-        print("5️⃣  🔙 Назад")
+        print("4️⃣  🔙 Назад")
         choice = input("👉 ")
         if choice == "1":
             self.buy_product()
@@ -1357,8 +1638,6 @@ class Game:
         elif choice == "3":
             self.buy_car()
         elif choice == "4":
-            self.buy_house()
-        elif choice == "5":
             return
 
 def main():
